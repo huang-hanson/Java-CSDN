@@ -1,5 +1,6 @@
 package com.hanson.eventlogging;
 
+import com.alibaba.cloud.nacos.discovery.NacosDiscoveryAutoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
