@@ -1,0 +1,5 @@
+#服务端口及服务名
+server.port=10000
+spring.application.name=csdn-sentinel-demo
+
+spring.cloud.sentinel.transport.dashboard=localhost:8083
