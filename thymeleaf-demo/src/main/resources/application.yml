@@ -1,0 +1,12 @@
+server:
+  port: 8088 #服务端口
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: thymeleaf-demo #指定服务名
+  thymeleaf:
+    cache: false  #关闭模板缓存，方便测试
+    suffix: .html
+    prefix: classpath:/templates/

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--thymeleaf的一些常用的内置对象-->
+<!--session对象-->
+<div th:text="${#session.getAttribute('name')}"></div>
+<!--lists对象-->
+<div th:text="${#lists.size(users)}"></div>
+<!--execInfo对象-->
+<div th:text="${#execInfo.getProcessedTemplateName}"></div>
+
+</body>
+</html>

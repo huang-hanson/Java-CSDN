@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--内联-->
+<!--其实取对象里的值还有以下这两种方式-->
+<div>hello [[${user.name}]]</div>
+<div>hello [(${user.name})]</div>
+<hr/>
+
+<!--如下，第一种方式对内容进行转义了，第二种方式没有对内容进行转义-->
+<div th:with="str='jq <b>a better language</b>'">
+    <div>[[${str}]]</div>
+    <div>[(${str})]</div>
+</div>
+
+<script th:inline="javascript">
+    var name = [[${user.name}]]
+    console.log(name)
+</script>
+
+</body>
+</html>

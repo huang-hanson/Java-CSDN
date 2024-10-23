@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--false-->
+<div th:text="9 eq 9 and 8 ne 8"></div>
+<!--true-->
+<div th:text="9 eq 9 or 8 ne 8"></div>
+<!--false-->
+<div th:text="not(9 eq 9 or 8 ne 8)"></div>
+<!--false-->
+<div th:text="!(9 eq 9 or 8 ne 8)"></div>
+
+</body>
+</html>

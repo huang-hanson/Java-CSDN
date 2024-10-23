@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:with="num=(100+100/100+90-1)">
+    <!--第一，第四和第六为true-->
+    <div th:text="${num} eq 190"></div>
+    <div th:text="${num} ne 190"></div>
+    <div th:text="${num} lt 190"></div>
+    <div th:text="${num} le 190"></div>
+    <div th:text="${num} gt 190"></div>
+    <div th:text="${num} ge 190"></div>
+</div>
+
+
+
+</body>
+</html>

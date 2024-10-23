@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--可以是全路径-->
+<script th:Src="@{http://localhost:8088/hello.js}"></script>
+<!--可以带参数-->
+<script th:Src="@{http://localhost:8088/hello.js(name='yl',age=19)}"></script>
+<!--~代表当前项目-->
+<script th:Src="@{~/hello.js}"></script>
+<!--也可以省略协议-->
+<script th:Src="@{//localhost:8088/hello.js}"></script>
+
+<img th:src="@{https://img01.51jobcdn.com/im/2021/avatar/female/avatar_toc_female12.png}" th:title="${user.name}" th:alt="${user.name}"/>
+
+
+<script>
+    // 确保在页面加载完成后调用 sayHello('Alice')
+    window.onload = function() {
+        sayHello('Hanson');
+    };
+</script>
+
+</body>
+</html>

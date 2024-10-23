@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <table border="1px">
+        <tr th:each="u,state : ${users}">
+            <td th:text="${u.id}"></td>
+            <td th:text="${u.name}"></td>
+            <td th:text="${u.age}"></td>
+            <!--当前的遍历索引，从0开始-->
+            <td th:text="${state.index}"></td>
+            <!--当前的遍历索引，从1开始-->
+            <td th:text="${state.count}"></td>
+            <!--集合元素的总个数-->
+            <td th:text="${state.size}"></td>
+            <!--当前遍历的对象-->
+            <td th:text="${state.current}"></td>
+            <!--当前遍历是否为奇数次遍历-->
+            <td th:text="${state.even}"></td>
+            <!--当前遍历是否为偶数次遍历-->
+            <td th:text="${state.odd}"></td>
+            <!--当前是否为第一次遍历-->
+            <td th:text="${state.first}"></td>
+            <!--当前是否为最后一次遍历-->
+            <td th:text="${state.last}"></td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:with="score=57">
+    <div th:text="(${score} ge 60) ? '及格' : '不及格'"></div>
+</div>
+
+</body>
+</html>

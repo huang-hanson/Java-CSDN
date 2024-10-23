@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--th:with可以定义变量-->
+<div th:with="num=(100+100/100+90-1)">
+    <div th:text="${num}"></div>
+</div>
+
+</body>
+</html>
