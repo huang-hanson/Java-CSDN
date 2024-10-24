@@ -1,5 +1,7 @@
 package com.hanson.freemarker.controller;
 
+import com.hanson.freemarker.model.Order;
+import com.hanson.freemarker.model.Price;
 import com.hanson.freemarker.model.Student;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -273,5 +275,18 @@ public class FreemarkerController {
     public String test10(Map<String, Object> map) {
         map.put("point", 102920122);
         return "test10";
+    }
+
+    @RequestMapping("/test11")
+    public String test11(Map<String, Object> map) {
+        Price price = new Price();
+        price.setPrice(123.45);
+        price.setDate(new Date());
+        Order order = new Order();
+        order.setOrderId(123456789L);
+        order.setOrderName("测试订单");
+        order.setPrice(price);
+        map.put("order", order);
+        return "test11";
     }
 }
