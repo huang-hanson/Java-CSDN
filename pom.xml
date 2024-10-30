@@ -17,6 +17,7 @@
         <module>strategy-factory-demo</module>
         <module>freemarker-demo</module>
         <module>thymeleaf-demo</module>
+        <module>java-base</module>
     </modules>
 
     <groupId>com.csdn.dev</groupId>
