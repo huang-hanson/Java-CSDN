@@ -1,22 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN">
-    <Appenders>
-        <!-- Console Appender -->
-        <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"/>
-        </Console>
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<Configuration status="WARN">-->
+<!--    <Appenders>-->
+<!--        &lt;!&ndash; Console Appender &ndash;&gt;-->
+<!--        <Console name="Console" target="SYSTEM_OUT">-->
+<!--            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"/>-->
+<!--        </Console>-->
 
-        <!-- File Appender -->
-        <File name="FileLogger" fileName="logs/application.log">
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"/>
-        </File>
-    </Appenders>
+<!--        &lt;!&ndash; File Appender &ndash;&gt;-->
+<!--        <File name="FileLogger" fileName="logs/application.log">-->
+<!--            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"/>-->
+<!--        </File>-->
+<!--    </Appenders>-->
 
-    <Loggers>
-        <!-- Root Logger -->
-        <Root level="trace">
-            <AppenderRef ref="Console"/>
-            <AppenderRef ref="FileLogger"/>
-        </Root>
-    </Loggers>
-</Configuration>
+<!--    <Loggers>-->
+<!--        &lt;!&ndash; Root Logger &ndash;&gt;-->
+<!--        <Root level="trace">-->
+<!--            <AppenderRef ref="Console"/>-->
+<!--            <AppenderRef ref="FileLogger"/>-->
+<!--        </Root>-->
+<!--    </Loggers>-->
+<!--</Configuration>-->

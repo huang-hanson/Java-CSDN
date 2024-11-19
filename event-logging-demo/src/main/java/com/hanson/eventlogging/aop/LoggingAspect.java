@@ -1,6 +1,6 @@
 package com.hanson.eventlogging.aop;
 
-import io.micrometer.core.annotation.Timed;
+//import io.micrometer.core.annotation.Timed;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
