@@ -1,7 +1,14 @@
 package com.encryption.algorithm.oneWayEncryption;
 
+import com.encryption.algorithm.entity.Channel;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
+
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+
+import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 
 /**
  * @author hanson.huang
@@ -10,6 +17,7 @@ import javax.crypto.spec.SecretKeySpec;
  * @Description HMAC-SHA256   这是单向加密。即只能加密不能解密，需要双方都进行加密然后进行比较
  * @date 2024/11/26 13:33
  **/
+@Slf4j
 public class HMACSHA256 {
 
     private static final String HMAC_SHA256 = "HmacSHA256";
@@ -17,13 +25,34 @@ public class HMACSHA256 {
     /**
      * 双方约定的公共key
      */
-    private static final String PUBLIC_KEY = "public_key";
+//    private static final String PUBLIC_KEY = "public_key";
+    private static final String PUBLIC_KEY = "VtvUx90UR7eAIzF1nLw3lWSNNYJuve42nRaPRfOEGdI=";
 
-    public static void main(String[] args) {
-        String data = "Hello, World!";
-        String signature = new HMACSHA256().hmacSha256(data, PUBLIC_KEY);
-        System.out.println("data: " + data);
-        System.out.println("signature: " + signature);
+    public static void main(String[] args) throws JsonProcessingException {
+//        String data = "Hello, World!";
+//        String signature = new HMACSHA256().hmacSha256(data, PUBLIC_KEY);
+//        System.out.println("data: " + data);
+//        System.out.println("signature: " + signature);
+        Channel channel = new Channel();
+        channel.setImei("868123039927020");
+        channel.setImei_md5("524f06f91c8fa92071ec85d5f23018d3");
+        channel.setOaid("818bfcd4-8a99-42e2-9bf7-2fdda71783b6");
+        channel.setOaid_md5("ba2b51a0fea359e4a8c68e6a629c12f3");
+        channel.setAndroidid("73101e08bdd5b0d78e1917aa96af6557");
+        channel.setAndroidid_md5("6772c24b3beea685a3707ac1720a70db");
+        channel.setIdfa("");
+        channel.setIdfa_md5("");
+        channel.setChannel("2230af99f17ab91dc1fc3a35b9578b04");
+        channel.setChannel2("2230af99f17ab91dc1fc3a35b9578b04");
+        channel.setClicktime(1732686824000L);
+        // 创建 ObjectMapper 实例
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        // 将对象转换为 JSON 字符串
+        String jsonString = objectMapper.writeValueAsString(channel);
+        System.out.println(jsonString);
+        String signature = new HMACSHA256().hmacSha256(jsonString.toString(), PUBLIC_KEY);
+        System.out.println(signature);
     }
 
     /**
@@ -35,26 +64,17 @@ public class HMACSHA256 {
      */
      public String hmacSha256(String data, String key) {
          try {
-            // 使用密钥创建 SecretKeySpec
             SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(), HMAC_SHA256);
-
-            // 获取 Mac 实例，使用 HmacSHA256 算法
             Mac mac = Mac.getInstance(HMAC_SHA256);
-
-            // 初始化 Mac 实例
             mac.init(secretKey);
-
-            // 计算哈希
             byte[] hash = mac.doFinal(data.getBytes());
-
-            // 转换字节数组为十六进制字符串
             return bytesToHex(hash);
         } catch (Exception e) {
-            throw new RuntimeException("HMAC-SHA256 计算异常", e);
+            throw new RuntimeException("HMAC-SHA256 计算失败", e);
         }
      }
 
-         /**
+     /**
      * 将字节数组转换为十六进制字符串
      *
      * @param bytes 字节数组

@@ -16,4 +16,5 @@ public class UserRequest {
     private String address;
     private String email;
     private String phone;
+    private String imeiMd5;
 }

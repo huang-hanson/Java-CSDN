@@ -17,18 +17,33 @@ public class MD5 {
 
     private static final String EXCPECTED_MD5 = "65a8e27d8879283831b664bd8b7f0ad4";
 
-    public static void main(String[] args) {
-        String content = "Hello, World!";
+//    public static void main(String[] args) {
+//        String content = "Hello, World!";
+//
+//        String md5 = generateMD5(content);
+//        System.out.println("MD5验证通过，原始内容：" + content);
+//        System.out.println("MD5值：" + md5);
+//        System.out.println("期望的MD5值：" + EXCPECTED_MD5);
+//        if (EXCPECTED_MD5.equals(md5)) {
+//            System.out.println("MD5验证成功！");
+//        } else {
+//            System.out.println("MD5验证失败！");
+//        }
+//    }
 
-        String md5 = generateMD5(content);
-        System.out.println("MD5验证通过，原始内容：" + content);
-        System.out.println("MD5值：" + md5);
-        System.out.println("期望的MD5值：" + EXCPECTED_MD5);
-        if (EXCPECTED_MD5.equals(md5)) {
-            System.out.println("MD5验证成功！");
-        } else {
-            System.out.println("MD5验证失败！");
-        }
+    public static void main(String[] args) {
+//        String content = "73101e08bdd5b0d78e1917aa96af6557";
+//
+//        String md5 = generateMD5(content);
+//        System.out.println("MD5验证通过，原始内容：" + content);
+//        System.out.println("MD5值：" + md5);
+//        System.out.println("期望的MD5值：" + EXCPECTED_MD5);
+//        if (EXCPECTED_MD5.equals(md5)) {
+//            System.out.println("MD5验证成功！");
+//        } else {
+//            System.out.println("MD5验证失败！");
+//        }
+        System.out.println("e71d01215e82adb7a13ad6d12d632fc401c1e13c4d57a792a1f4c775949cb47f".length());
     }
 
 

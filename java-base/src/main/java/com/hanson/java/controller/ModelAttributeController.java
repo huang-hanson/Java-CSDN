@@ -1,8 +1,8 @@
 package com.hanson.java.controller;
 
 import com.hanson.java.entity.UserRequest;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ModelAttributeController {
 
-    @GetMapping("/open/noauth/mkt/get_click_data")
+    @PostMapping("/open/noauth/mkt/get_click_data")
     public UserRequest getClickData(@ModelAttribute UserRequest request) {
         // 返回封装的请求数据
         return request;
