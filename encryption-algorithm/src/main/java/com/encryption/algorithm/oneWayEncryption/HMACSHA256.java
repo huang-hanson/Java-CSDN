@@ -44,7 +44,7 @@ public class HMACSHA256 {
         channel.setIdfa_md5("");
         channel.setChannel("2230af99f17ab91dc1fc3a35b9578b04");
         channel.setChannel2("2230af99f17ab91dc1fc3a35b9578b04");
-        channel.setClicktime(1732686824000L);
+        channel.setClicktime(1732709178883L);
         // 创建 ObjectMapper 实例
         ObjectMapper objectMapper = new ObjectMapper();
 
