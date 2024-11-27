@@ -68,7 +68,11 @@ public class HMACSHA256 {
             Mac mac = Mac.getInstance(HMAC_SHA256);
             mac.init(secretKey);
             byte[] hash = mac.doFinal(data.getBytes());
-            return bytesToHex(hash);
+             String s1 = bytesToHex(hash);
+             String s2 = byteArrayToHexString(hash);
+             System.out.println(s1);
+             System.out.println(s2);
+             return bytesToHex(hash);
         } catch (Exception e) {
             throw new RuntimeException("HMAC-SHA256 计算失败", e);
         }
@@ -86,5 +90,24 @@ public class HMACSHA256 {
             sb.append(String.format("%02x", b));
         }
         return sb.toString();
+    }
+
+        /**
+     * 将加密后的字节数组转换成字符串
+     *
+     * @param b 字节数组
+     * @return 字符串
+     */
+    public static String byteArrayToHexString(byte[] b) {
+        StringBuilder hs = new StringBuilder();
+        String stmp;
+        for (int n = 0; b != null && n < b.length; n++) {
+            stmp = Integer.toHexString(b[n] & 0XFF);
+            if (stmp.length() == 1) {
+                hs.append('0');
+            }
+            hs.append(stmp);
+        }
+        return hs.toString().toLowerCase();
     }
 }
