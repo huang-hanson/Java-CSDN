@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>日期计算工具</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>日期计算工具</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <h4>计算两个日期之间的差值</h4>
+                <div class="form-group">
+                    <label for="date1">起始日期</label>
+                    <input type="date" class="form-control" id="date1">
+                </div>
+                <div class="form-group">
+                    <label for="date2">结束日期</label>
+                    <input type="date" class="form-control" id="date2">
+                </div>
+                <button class="btn btn-primary" onclick="calculateDateDifference()">计算差值</button>
+                <p id="dateDifference"></p>
+            </div>
+            <div class="col-md-6">
+                <h4>计算几天后的日期</h4>
+                <div class="form-group">
+                    <label for="startDate">起始日期</label>
+                    <input type="date" class="form-control" id="startDate">
+                </div>
+                <div class="form-group">
+                    <label for="daysToAdd">天数</label>
+                    <input type="number" class="form-control" id="daysToAdd">
+                </div>
+                <button class="btn btn-primary" onclick="calculateFutureDate()">计算日期</button>
+                <p id="futureDate"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+    <script>
+        function calculateDateDifference() {
+            const date1 = new Date(document.getElementById('date1').value);
+            const date2 = new Date(document.getElementById('date2').value);
+            const diffTime = Math.abs(date2 - date1);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            document.getElementById('dateDifference').innerText = `两个日期之间的差值为 ${diffDays} 天`;
+        }
+
+        function calculateFutureDate() {
+            const startDate = new Date(document.getElementById('startDate').value);
+            const daysToAdd = parseInt(document.getElementById('daysToAdd').value);
+            const futureDate = new Date(startDate);
+            futureDate.setDate(futureDate.getDate() + daysToAdd);
+            document.getElementById('futureDate').innerText = `几天后的日期为 ${futureDate.toISOString().split('T')[0]}`;
+        }
+    </script>
+</body>
+</html>
