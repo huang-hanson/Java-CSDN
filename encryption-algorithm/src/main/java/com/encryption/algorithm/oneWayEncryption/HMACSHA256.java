@@ -26,7 +26,7 @@ public class HMACSHA256 {
      * 双方约定的公共key
      */
 //    private static final String PUBLIC_KEY = "public_key";
-    private static final String PUBLIC_KEY = "VtvUx90UR7eAIzF1nLw3lWSNNYJuve42nRaPRfOEGdI=";
+    private static final String PUBLIC_KEY = "Z3A1e2bEXM9TLKiA4w1Vtb8jqzq9tA9OmyG0I61nPlQ=";
 
     public static void main(String[] args) throws JsonProcessingException {
 //        String data = "Hello, World!";
@@ -44,7 +44,7 @@ public class HMACSHA256 {
         channel.setIdfa_md5("");
         channel.setChannel("2230af99f17ab91dc1fc3a35b9578b04");
         channel.setChannel2("2230af99f17ab91dc1fc3a35b9578b04");
-        channel.setClicktime(1732709178883L);
+        channel.setClicktime(1732849603250L);
         // 创建 ObjectMapper 实例
         ObjectMapper objectMapper = new ObjectMapper();
 

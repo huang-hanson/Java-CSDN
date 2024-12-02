@@ -43,7 +43,7 @@ public class MD5 {
 //        } else {
 //            System.out.println("MD5验证失败！");
 //        }
-        System.out.println("e71d01215e82adb7a13ad6d12d632fc401c1e13c4d57a792a1f4c775949cb47f".length());
+        System.out.println("Z3A1e2bEXM9TLKiA4w1Vtb8jqzq9tA9OmyG0I61nPlQ=".length());
     }
 
 
