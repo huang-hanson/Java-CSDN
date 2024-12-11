@@ -19,6 +19,8 @@
         <module>thymeleaf-demo</module>
         <module>java-base</module>
         <module>encryption-algorithm</module>
+        <module>threadpool-demo</module>
+        <module>common</module>
     </modules>
 
     <groupId>com.csdn.dev</groupId>
@@ -61,6 +63,11 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -101,6 +108,7 @@
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
+                <version>3.17.0</version>
             </dependency>
 
             <dependency>
