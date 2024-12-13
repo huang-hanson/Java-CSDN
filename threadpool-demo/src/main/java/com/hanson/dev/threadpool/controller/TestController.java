@@ -24,4 +24,11 @@ public class TestController {
         SyncMapTOCopyMapDTO syncMapTOCopyMapDTO = testThreadPoolService.syncMapTOCopyMap(null, null);
         return syncMapTOCopyMapDTO;
     }
+
+
+    @GetMapping("/test/method")
+    public Object testMethod2() {
+        SyncMapTOCopyMapDTO syncMapTOCopyMapDTO = testThreadPoolService.method2(null, null);
+        return syncMapTOCopyMapDTO;
+    }
 }

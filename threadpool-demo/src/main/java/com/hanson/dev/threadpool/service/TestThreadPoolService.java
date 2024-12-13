@@ -13,4 +13,6 @@ import java.util.List;
  **/
 public interface TestThreadPoolService {
     SyncMapTOCopyMapDTO syncMapTOCopyMap(List<String> map, List<String> copyMap);
+
+    SyncMapTOCopyMapDTO method2(List<String> map, List<String> copyMap);
 }

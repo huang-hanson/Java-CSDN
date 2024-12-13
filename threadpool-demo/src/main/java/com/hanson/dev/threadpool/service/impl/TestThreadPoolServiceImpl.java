@@ -5,8 +5,11 @@ import com.hanson.dev.threadpool.constant.Constant;
 import com.hanson.dev.threadpool.entity.dto.SyncMapTOCopyMapDTO;
 import com.hanson.dev.threadpool.service.TestThreadPoolService;
 import com.hanson.dev.threadpool.util.SyncListDataLogUtils;
+import com.hanson.dev.threadpool.util.TaskServiceUtils;
 import com.hanson.dev.threadpool.util.ThreadPoolUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -14,6 +17,7 @@ import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author hanson.huang
@@ -27,6 +31,12 @@ public class TestThreadPoolServiceImpl implements TestThreadPoolService {
 
     @Resource
     ThreadPoolUtils threadPool;
+
+    @Value("${test.sync.taskexecutor.group.num:2}")
+    private int groupNum;
+
+    @Resource(name="testAsyncExecutor")
+    ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
     private static final List<String> LIST = fillListWithRandomData(new ArrayList<>(), 101);
 
@@ -73,6 +83,53 @@ public class TestThreadPoolServiceImpl implements TestThreadPoolService {
                 }
             } catch (Exception e) {
                 log.error("简历同步定时任务，获取子任务结果异常", e);
+            }
+        }
+        Instant endInstant = Instant.now();
+        syncResult.setTimeCost(endInstant.toEpochMilli() - startInstant.toEpochMilli());
+        SyncListDataLogUtils.syncToMongoOnLastUpdateLog(syncResult, syncResult.getTimeCost());
+        return syncResult;
+    }
+
+    /**
+     * 多线程第二种方案
+     */
+    @Override
+    public SyncMapTOCopyMapDTO method2(List<String> list, List<String> copyMap) {
+        list = LIST;
+        Instant startInstant = Instant.now();
+        List<Future<SyncMapTOCopyMapDTO>> futureList = new ArrayList<>();
+
+        //分n组执行任务
+        List<List<String>> subList = TaskServiceUtils.averageAssign(list, groupNum);
+        for (int i = 0; i < groupNum; i++) {
+            int index = i;
+            Future<SyncMapTOCopyMapDTO> intFuture = threadPoolTaskExecutor.submit(() -> syncListDataTOCopyList(subList.get(index), index));
+            futureList.add(intFuture);
+        }
+        //子任务执行结果汇总
+        SyncMapTOCopyMapDTO syncResult = new SyncMapTOCopyMapDTO();
+        syncResult.setTotalCount(list.size());
+        syncResult.setNeedSyncCount(0);
+        syncResult.setSuccessCount(0);
+        syncResult.setFailCount(0);
+        syncResult.setFailList(new ArrayList<>());
+        //收集返回结果
+        int successTotal = 0;
+        for (Future<SyncMapTOCopyMapDTO> intFuture : futureList) {
+            try {
+                SyncMapTOCopyMapDTO taskResult = TaskServiceUtils.futureGet(intFuture, 24, TimeUnit.HOURS, "同步用户标签信息到企微定时任务, 获取第" + futureList.indexOf(intFuture) + "组结果超时");
+                if (taskResult == null) {
+                    log.error("获取子任务结果异常，子任务结果为null");
+                } else {
+                    syncResult.setNeedSyncCount(syncResult.getNeedSyncCount() + taskResult.getNeedSyncCount());
+                    syncResult.setSuccessCount(syncResult.getSuccessCount() + taskResult.getSuccessCount());
+                    syncResult.setFailCount(syncResult.getFailCount() + taskResult.getFailCount());
+                    syncResult.getFailList().addAll(taskResult.getFailList());
+                }
+                log.info("同步用户标签信息到企微定时任务, 获取第" + futureList.indexOf(intFuture) + "组结果成功，result:" + taskResult);
+            }catch (Exception e){
+                log.error("同步用户标签信息到企微定时任务, 获取执行结果失败！", e);
             }
         }
         Instant endInstant = Instant.now();
