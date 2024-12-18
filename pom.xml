@@ -32,6 +32,7 @@
         <revision>1.0.0-SNAPSHOT</revision>
         <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
         <boostrap.version>3.0.3</boostrap.version>
+        <mysql-connector.version>8.0.28</mysql-connector.version>
     </properties>
 
     <build>
@@ -116,6 +117,11 @@
                 <artifactId>spring-boot-starter-aop</artifactId>
             </dependency>
 
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>
