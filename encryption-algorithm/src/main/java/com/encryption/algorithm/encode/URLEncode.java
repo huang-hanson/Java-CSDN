@@ -22,13 +22,16 @@ public class URLEncode {
 
     private static final String DECODEURL = "www.baidu.com";
 
+    private static final String DECODEURL2 = "security:18AEAA6B26E855B778084D00:6E723724515A2D10DB08BC47D1D18B0A6108D4859D4F35C60139796D2EF58A85E20087B8C82961EE1D97281952835224DA07BAD0";
+
     public static void main(String[] args) {
         String decode = decode(ENCODEURL);
         System.out.println(decode);
 
-        String encode = encode(DECODEURL);
+        String encode = encode(DECODEURL2);
         System.out.println(encode);
     }
+
 
     /**
      * url解码
