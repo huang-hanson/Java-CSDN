@@ -21,6 +21,8 @@
         <module>encryption-algorithm</module>
         <module>threadpool-demo</module>
         <module>common</module>
+        <module>sql-test-demo</module>
+        <module>mybatis-source-demo</module>
     </modules>
 
     <groupId>com.csdn.dev</groupId>

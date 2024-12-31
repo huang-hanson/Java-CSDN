@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <settings>
+        <!-- 开启延迟加载的全局开关 -->
+        <setting name="lazyLoadingEnabled" value="true" />
+        <!-- 当启用延迟加载时，任何延迟属性都会加载其所有的关联属性 -->
+        <setting name="aggressiveLazyLoading" value="false" />
+        <!-- 允许单条SQL返回多结果集（需要兼容的驱动） -->
+        <setting name="multipleResultSetsEnabled" value="true" />
+        <!-- 使用列标签代替列名称 -->
+        <setting name="useColumnLabel" value="true" />
+        <!-- 允许 JDBC 支持生成的键值 -->
+        <setting name="useGeneratedKeys" value="true" />
+        <!-- 配置默认的执行器。SIMPLE：普通的执行器；REUSE：执行器会重用预处理语句；BATCH：执行器会重用预处理语句和批量更新 -->
+        <setting name="defaultExecutorType" value="SIMPLE" />
+        <!-- 设置超时时间 -->
+        <setting name="defaultStatementTimeout" value="25" />
+        <!-- 是否开启自动驼峰命名规则（camel case）映射 -->
+        <setting name="mapUnderscoreToCamelCase" value="true" />
+    </settings>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/csdn-test?useSSL=false&amp;serverTimezone=UTC"/>
+                <property name="username" value="root"/>
+                <property name="password" value="123456"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="com/example/mapper/UserMapper.xml"/>
+        <!-- 添加其他映射器文件 -->
+    </mappers>
+</configuration>
