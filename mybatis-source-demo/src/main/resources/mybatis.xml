@@ -4,23 +4,38 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
+    <!-- <properties resource="jdbc.properties"/> -->
+    <properties>
+        <property name="jdbc.driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="jdbc.url" value="jdbc:mysql://localhost:3306/db_mybatis"/>
+        <property name="jdbc.username" value="root"/>
+        <property name="jdbc.password" value="123456"/>
+    </properties>
+
+<!--    <typeAliases>-->
+<!--        <typeAlias alias="Student" type="com.java1234.model.Student"/>-->
+<!--    </typeAliases> -->
+<!--    <typeAliases>-->
+<!--        <package name="com.java1234.model"/>-->
+<!--    </typeAliases>-->
+
     <settings>
         <!-- 开启延迟加载的全局开关 -->
-        <setting name="lazyLoadingEnabled" value="true" />
+        <setting name="lazyLoadingEnabled" value="true"/>
         <!-- 当启用延迟加载时，任何延迟属性都会加载其所有的关联属性 -->
-        <setting name="aggressiveLazyLoading" value="false" />
+        <setting name="aggressiveLazyLoading" value="false"/>
         <!-- 允许单条SQL返回多结果集（需要兼容的驱动） -->
-        <setting name="multipleResultSetsEnabled" value="true" />
+        <setting name="multipleResultSetsEnabled" value="true"/>
         <!-- 使用列标签代替列名称 -->
-        <setting name="useColumnLabel" value="true" />
+        <setting name="useColumnLabel" value="true"/>
         <!-- 允许 JDBC 支持生成的键值 -->
-        <setting name="useGeneratedKeys" value="true" />
+        <setting name="useGeneratedKeys" value="true"/>
         <!-- 配置默认的执行器。SIMPLE：普通的执行器；REUSE：执行器会重用预处理语句；BATCH：执行器会重用预处理语句和批量更新 -->
-        <setting name="defaultExecutorType" value="SIMPLE" />
+        <setting name="defaultExecutorType" value="SIMPLE"/>
         <!-- 设置超时时间 -->
-        <setting name="defaultStatementTimeout" value="25" />
+        <setting name="defaultStatementTimeout" value="25"/>
         <!-- 是否开启自动驼峰命名规则（camel case）映射 -->
-        <setting name="mapUnderscoreToCamelCase" value="true" />
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
 
     <environments default="development">

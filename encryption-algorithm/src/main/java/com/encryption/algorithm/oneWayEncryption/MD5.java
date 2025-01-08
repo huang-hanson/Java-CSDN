@@ -44,7 +44,11 @@ public class MD5 {
 //            System.out.println("MD5验证失败！");
 //        }
         System.out.println("Z3A1e2bEXM9TLKiA4w1Vtb8jqzq9tA9OmyG0I61nPlQ=".length());
-        System.out.println(generateMD5("SEMBDWXSS_dl_ios"));
+        System.out.println(generateMD5("A5AD4102-3CA9-43D3-B209-F1E204B47BD9"));
+
+        System.out.println(generateMD5("1697285156.526881310"));
+        System.out.println(generateMD5("1726733986.242792"));
+        System.out.println(generateMD5("1735536274"));
     }
 
 
