@@ -24,7 +24,6 @@
         <module>common</module>
         <module>sql-test-demo</module>
         <module>mybatis-source-demo</module>
-        <module>chat2DB-demo</module>
         <module>db-test</module>
     </modules>
 
