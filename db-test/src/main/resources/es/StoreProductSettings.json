@@ -1,0 +1,17 @@
+{
+  "index": {
+    "number_of_shards": 1,
+    "number_of_replicas": 1,
+    "max_result_window": 100000
+  },
+  "analysis": {
+    "normalizer": {
+      "my_lowercase": {
+        "type": "custom",
+        "filter": [
+          "lowercase"
+        ]
+      }
+    }
+  }
+}

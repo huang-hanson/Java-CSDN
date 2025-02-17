@@ -7,7 +7,8 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.4.2</version>
+<!--        <version>2.4.2</version>-->
+        <version>2.7.15</version> <!--为适配es8，升版本-->
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -24,6 +25,7 @@
         <module>sql-test-demo</module>
         <module>mybatis-source-demo</module>
         <module>chat2DB-demo</module>
+        <module>db-test</module>
     </modules>
 
     <groupId>com.csdn.dev</groupId>
