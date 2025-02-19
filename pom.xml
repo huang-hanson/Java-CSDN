@@ -7,8 +7,8 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-<!--        <version>2.4.2</version>-->
-        <version>2.7.15</version> <!--为适配es8，升版本-->
+        <version>2.4.2</version>
+<!--        <version>2.7.15</version> &lt;!&ndash;为适配es8，升版本&ndash;&gt;-->
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -38,6 +38,7 @@
         <boostrap.version>3.0.3</boostrap.version>
         <mysql-connector.version>8.0.28</mysql-connector.version>
         <mybatis-plus-version>3.4.3.4</mybatis-plus-version>
+        <hutool.version>5.8.31</hutool.version>
     </properties>
 
     <build>
@@ -73,6 +74,12 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
         </dependency>
     </dependencies>
 

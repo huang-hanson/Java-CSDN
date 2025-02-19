@@ -29,122 +29,122 @@ public class StoreProductEsDTO {
     /**
      * 图片
      */
-    @Field(type = FieldType.Text)
+    @Field(value = "image", type = FieldType.Text)
     private String image;
     /**
      * 滑块图片
      */
-    @Field(type = FieldType.Text)
+    @Field(value = "slider_image", type = FieldType.Text)
     private String sliderImage;
     /**
      * 店铺名称
      */
-    @Field(type = FieldType.Text)
+    @Field(value = "store_name", type = FieldType.Text)
     private String storeName;
     /**
      * 店铺信息
      */
-    @Field(type = FieldType.Text)
+    @Field(value = "store_info", type = FieldType.Text)
     private String storeInfo;
     /**
      * 关键词
      */
-    @Field(type = FieldType.Text)
+    @Field(value = "keyword", type = FieldType.Text)
     private String keyword;
     /**
      * 分类 ID
      */
-    @Field(type = FieldType.Keyword)
+    @Field(value = "cate_id", type = FieldType.Keyword)
     private String cateId;
     /**
      * 单位名称
      */
-    @Field(type = FieldType.Text)
+    @Field(value = "unit_name", type = FieldType.Text)
     private String unitName;
     /**
      * 排序
      */
-    @Field(type = FieldType.Integer)
+    @Field(value = "sort", type = FieldType.Integer)
     private Integer sort;
     /**
      * 是否热门
      */
-    @Field(type = FieldType.Boolean)
+    @Field(value = "is_hot", type = FieldType.Boolean)
     private Boolean isHot;
     /**
      * 是否有优惠
      */
-    @Field(type = FieldType.Boolean)
+    @Field(value = "is_benefit", type = FieldType.Boolean)
     private Boolean isBenefit;
     /**
      * 是否精品
      */
-    @Field(type = FieldType.Boolean)
+    @Field(value = "is_best", type = FieldType.Boolean)
     private Boolean isBest;
     /**
      * 是否新品
      */
-    @Field(type = FieldType.Boolean)
+    @Field(value = "is_new", type = FieldType.Boolean)
     private Boolean isNew;
     /**
      * 是否优质
      */
-    @Field(type = FieldType.Boolean)
+    @Field(value = "is_good", type = FieldType.Boolean)
     private Boolean isGood;
     /**
      * 赠送积分
      */
-    @Field(type = FieldType.Integer)
+    @Field(value = "give_integral", type = FieldType.Integer)
     private Integer giveIntegral;
     /**
      * 是否子项
      */
-    @Field(type = FieldType.Boolean)
+    @Field(value = "is_sub", type = FieldType.Boolean)
     private Boolean isSub;
     /**
      * 虚拟数据
      */
-    @Field(type = FieldType.Integer)
+    @Field(value = "ficti", type = FieldType.Integer)
     private Integer ficti;
     /**
      * 模板 ID
      */
-    @Field(type = FieldType.Integer)
+    @Field(value = "temp_id", type = FieldType.Integer)
     private Integer tempId;
     /**
      * 规格类型
      */
-    @Field(type = FieldType.Boolean)
+    @Field(value = "spec_type", type = FieldType.Boolean)
     private Boolean specType;
     /**
      * 活动
      */
-    @Field(type = FieldType.Text)
+    @Field(value = "activity", type = FieldType.Text)
     private String activity;
     /**
      * 属性
      */
-    @Field(type = FieldType.Text)
+    @Field(value = "attr", type = FieldType.Text)
     private String attr;
     /**
      * 属性值
      */
-    @Field(type = FieldType.Text)
+    @Field(value = "attr_value", type = FieldType.Text)
     private String attrValue;
     /**
      * 内容
      */
-    @Field(type = FieldType.Text)
+    @Field(value = "content", type = FieldType.Text)
     private String content;
     /**
      * 优惠券 ID 列表
      */
-    @Field(type = FieldType.Text)
+    @Field(value = "coupon_ids", type = FieldType.Text)
     private String couponIds;
     /**
      * 平铺模式
      */
-    @Field(type = FieldType.Text)
+    @Field(value = "flat_pattern", type = FieldType.Text)
     private String flatPattern;
 
 }

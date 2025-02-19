@@ -1,6 +1,7 @@
 package com.db.test.entity.dto;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,6 +15,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
  * @date 2025/2/17 17:41
  **/
 @Data
+@Accessors(chain = true)
 @Document("storeproductinfo")
 public class MongoStoreProduct {
 

@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.db.test.entity.bo.StoreProduct;
 import com.db.test.entity.request.StoreProductRequest;
 
+import java.util.Map;
+
 /**
  * @author hanson.huang
  * @version V1.0
@@ -14,4 +16,6 @@ import com.db.test.entity.request.StoreProductRequest;
 public interface StoreProductService extends IService<StoreProduct> {
 
     void insertData(StoreProductRequest storeProductRequest);
+
+    Map<String, Object> getData(Integer id);
 }

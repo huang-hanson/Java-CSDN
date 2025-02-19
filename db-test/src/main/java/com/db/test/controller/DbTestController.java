@@ -2,12 +2,10 @@ package com.db.test.controller;
 
 import com.db.test.entity.request.StoreProductRequest;
 import com.db.test.service.StoreProductService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * @author hanson.huang
@@ -23,10 +21,26 @@ public class DbTestController {
     @Resource
     private StoreProductService storeProductService;
 
+    /**
+     * 添加数据
+     *
+     * @param storeProductRequest 需要添加的数据
+     * @return
+     */
     @PostMapping("/addData")
     public String addData(@RequestBody StoreProductRequest storeProductRequest) {
         storeProductService.insertData(storeProductRequest);
         return "success";
     }
 
+    /**
+     * 通过id查询数据
+     *
+     * @param id 根据id查询数据
+     * @return
+     */
+    @GetMapping("/selectData/{id}")
+    public Map<String, Object> selectData(@PathVariable Integer id) {
+        return storeProductService.getData(id);
+    }
 }
