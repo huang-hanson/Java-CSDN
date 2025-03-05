@@ -25,6 +25,7 @@
         <module>sql-test-demo</module>
         <module>mybatis-source-demo</module>
         <module>db-test</module>
+        <module>grpc-test</module>
     </modules>
 
     <groupId>com.csdn.dev</groupId>

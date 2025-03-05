@@ -38,4 +38,9 @@ public class OShiTest {
         }
     }
 
+    @Test
+    void test_str_length() {
+        log.error("24oi6xq2aaakvagnqu7a".length()+"");
+    }
+
 }

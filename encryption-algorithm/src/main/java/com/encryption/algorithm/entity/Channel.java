@@ -34,5 +34,9 @@ public class Channel {
     private String idfa_md5;
 
     private Long clicktime;
+
+//    private String callback;
+
+//    private String sign;
 //    private String clicktime;
 }
