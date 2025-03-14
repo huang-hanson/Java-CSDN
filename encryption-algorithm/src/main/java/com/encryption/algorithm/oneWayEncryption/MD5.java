@@ -54,6 +54,9 @@ public class MD5 {
 
         System.out.println(generateMD5("SEMBDWXSS_dl_ios_kws_11"));
         System.out.println(generateMD5("华为Ads 哇棒移动_android"));
+        System.out.println(generateMD5("bilibili_dl_and_xxl01"));
+        System.out.println(generateMD5("bilibili_dl_and"));
+        System.out.println(generateMD5("信息流01"));
     }
 
 
