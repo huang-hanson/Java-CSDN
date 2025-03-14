@@ -65,7 +65,12 @@
 1. [《【Spring】一问详解什么是Spring IoC和DI》](https://blog.csdn.net/weixin_45683778/article/details/137519538)
 2. [《【Spring事务机制】一文讲解spring事务机制》](https://blog.csdn.net/weixin_45683778/article/details/137027917)
 
+# Spring Cloud Alibaba
 
+## Nacos
+
+1. [《【Nacos】Nacos源码保姆级解析》](https://blog.csdn.net/weixin_45683778/article/details/146235697)
+2. [【Nacos】服务发布之优雅预热上线方案](https://blog.csdn.net/weixin_45683778/article/details/146260928)
 
 # Go领域
 
