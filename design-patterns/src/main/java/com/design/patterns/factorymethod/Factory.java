@@ -4,12 +4,10 @@ package com.design.patterns.factorymethod;
  * @author hanson.huang
  * @version V1.0
  * @InterfaceName Factory
- * @Description 抽象工厂
- * @date 2025/3/21 15:31
+ * @Description 工厂接口
+ * @date 2025/3/21 16:58
  **/
 public interface Factory {
 
-    public ProductA createProductA();
-
-    public ProductB createProductB();
+    public Product createProduct();
 }

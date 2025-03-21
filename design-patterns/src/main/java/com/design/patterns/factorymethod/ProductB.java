@@ -3,11 +3,15 @@ package com.design.patterns.factorymethod;
 /**
  * @author hanson.huang
  * @version V1.0
- * @InterfaceName ProductB
- * @Description 抽象产品B
- * @date 2025/3/21 15:33
+ * @ClassName ProductB
+ * @Description 产品实现类B
+ * @date 2025/3/21 17:01
  **/
-public interface ProductB {
+public class ProductB extends Product {
+//public class ProductB implements Product {
 
-    public void info();
+    @Override
+    public void info() {
+        System.out.println("产品的信息：B");
+    }
 }
