@@ -56,7 +56,10 @@ public class MD5 {
         System.out.println(generateMD5("华为Ads 哇棒移动_android"));
         System.out.println(generateMD5("bilibili_dl_and_xxl01"));
         System.out.println(generateMD5("bilibili_dl_and"));
-        System.out.println(generateMD5("信息流01"));
+        System.out.println(generateMD5("xhs_hss_ios21"));
+        System.out.println(generateMD5("xhs_hss_andriod"));
+        System.out.println(generateMD5("00000000-0000-0000-0000-000000000000"));
+        System.out.println(generateMD5("00000000-0000-0000-0000-000000000000").toUpperCase());
     }
 
 
