@@ -1,4 +1,4 @@
-package com.design.patterns.factorymethod;
+package com.design.patterns.creative.factorymethod;
 
 /**
  * @author hanson.huang

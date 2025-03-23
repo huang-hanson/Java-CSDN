@@ -1,4 +1,4 @@
-package com.design.patterns.abstractfactory;
+package com.design.patterns.creative.abstractfactory;
 
 /**
  * @author hanson.huang

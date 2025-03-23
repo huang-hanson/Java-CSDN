@@ -1,4 +1,4 @@
-package com.design.patterns.builderpattern;
+package com.design.patterns.creative.builderpattern;
 
 /**
  * @author hanson
