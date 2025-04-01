@@ -1,0 +1,13 @@
+sequenceDiagram
+    participant 外设
+    participant CPU
+    participant 中断控制器
+    participant 内存
+    participant ISR
+
+    外设 ->> CPU: 发送中断请求
+    CPU ->> 中断控制器: 查询中断号
+    中断控制器 ->> CPU: 返回中断号
+    CPU ->> 内存: 根据中断号查询向量表
+    内存 ->> CPU: 返回ISR入口地址
+    CPU ->> ISR: 跳转执行

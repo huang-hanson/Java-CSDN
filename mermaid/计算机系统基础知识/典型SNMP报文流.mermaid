@@ -1,0 +1,4 @@
+sequenceDiagram
+    管理站->>设备: SNMP GetRequest (UDP 161)
+    设备->>管理站: SNMP Response (UDP 161)
+    设备->>管理站: SNMP Trap (UDP 162)

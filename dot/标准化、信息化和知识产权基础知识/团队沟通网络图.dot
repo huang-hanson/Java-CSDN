@@ -1,0 +1,10 @@
+graph team {
+    rankdir=LR;
+    A -- {B C D E F G H}
+    B -- {C D E F G H}
+    C -- {D E F G H}
+    D -- {E F G H}
+    E -- {F G H}
+    F -- {G H}
+    G -- H
+}
