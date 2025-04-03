@@ -1,0 +1,13 @@
+graph TD
+%% 原始森林结构
+    T1A((T1根)) --> T1B
+    T1A --> T1C
+    T2A((T2根)) --> T2B
+    T3A((T3根)) --> T3B
+
+%% 转换后的二叉树结构
+    BTRoot((T1根)) -->|左| BT1B
+    BTRoot -->|右| BT2Root((T2根))
+    BT2Root -->|左| BT2B
+    BT2Root -->|右| BT3Root((T3根))
+    BT3Root -->|左| BT3B

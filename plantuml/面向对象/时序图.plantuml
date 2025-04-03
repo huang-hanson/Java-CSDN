@@ -1,0 +1,8 @@
+@startuml
+actor User
+User -> System : a
+loop 1..2
+    System -> Database : b
+end
+System -> User : c
+@enduml
