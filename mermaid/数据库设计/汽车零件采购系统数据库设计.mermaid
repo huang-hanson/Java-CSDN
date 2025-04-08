@@ -1,0 +1,25 @@
+erDiagram
+    Supplier ||--o{ Purchase : "makes"
+    Part ||--o{ Purchase : "included in"
+
+    Supplier {
+        string Name
+        string Address
+        string Phone
+    }
+
+    CarModel {
+        string Name
+        string Specification
+    }
+
+    Purchase {
+        int Quantity
+        date PurchaseDate
+    }
+
+    Part {
+        string PartID
+        string PartName
+        float Price
+    }

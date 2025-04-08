@@ -1,0 +1,59 @@
+classDiagram
+    class Resource {
+        +题名
+        +作者
+        +发表时间
+        +来源
+        +被引次数
+        +下载次数
+    }
+
+    class ConferencePaper {
+        +会议名称
+        +召开时间
+        +召开地点
+    }
+
+    class JournalArticle {
+        +期刊名称
+        +出版月份
+        +期号
+        +主办单位
+    }
+
+    class Thesis {
+        +学位类别
+        +毕业学校
+        +专业
+        +指导教师
+    }
+
+    class User {
+        +登录凭证
+    }
+
+    class Student
+    class Teacher
+    class Staff
+
+    Resource <|-- ConferencePaper
+    Resource <|-- JournalArticle
+    Resource <|-- Thesis
+    User <|-- Student
+    User <|-- Teacher
+    User <|-- Staff
+
+    class Proceeding {
+        +会议名称
+        +召开时间范围
+        +地点
+    }
+
+    class Edition {
+        +期刊名称
+        +出版日期
+        +期号
+    }
+
+    ConferencePaper "1" *-- "1" Proceeding
+    JournalArticle "1" *-- "1" Edition

@@ -1,0 +1,42 @@
+classDiagram
+%% 正确定义接口的方式
+    class PrintStrategy {
+        <<interface>>
+        +doPrint(Interval val) void
+    }
+
+%% 具体类定义
+    class PrintIntervalsComma {
+        +doPrint(Interval val) void
+    }
+
+    class PrintIntervalsDots {
+        +doPrint(Interval val) void
+    }
+
+    class PrintIntervalsLine {
+        +doPrint(Interval val) void
+    }
+
+%% 其他类
+    class Interval {
+        -lower: double
+        -upper: double
+        +getLower() double
+        +getUpper() double
+        +printIntervals(PrintStrategy ptr) void
+    }
+
+    class Main {
+        +getStrategy(TYPE type) PrintStrategy
+        +main(String[] args) void
+    }
+
+%% 类关系
+    PrintStrategy <|.. PrintIntervalsComma
+    PrintStrategy <|.. PrintIntervalsDots
+    PrintStrategy <|.. PrintIntervalsLine
+    Interval --> PrintStrategy
+    Main ..> PrintIntervalsComma
+    Main ..> PrintIntervalsDots
+    Main ..> PrintIntervalsLine
