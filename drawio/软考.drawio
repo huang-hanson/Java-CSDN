@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36" version="26.2.12">
   <diagram name="第 1 页" id="BHpYCddG2A7uFnGwDvGF">
-    <mxGraphModel dx="1826" dy="784" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1785" dy="541" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -299,6 +299,42 @@
         </mxCell>
         <mxCell id="TnxMHJFzGaN-m46BlRNR-105" value="P6执行" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="245" y="1703.5" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="TnxMHJFzGaN-m46BlRNR-106" value=":FundsTransactionManager" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-453" y="1919" width="263" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="TnxMHJFzGaN-m46BlRNR-107" value="src:Account" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-82" y="1919" width="132" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="TnxMHJFzGaN-m46BlRNR-108" value="tgt:Account" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="124" y="1919" width="132" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="TnxMHJFzGaN-m46BlRNR-110" value="" style="endArrow=none;dashed=1;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-322" y="2273" as="sourcePoint" />
+            <mxPoint x="-322" y="1989" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TnxMHJFzGaN-m46BlRNR-109" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-326.75" y="2003" width="10.5" height="208" as="geometry" />
+        </mxCell>
+        <mxCell id="TnxMHJFzGaN-m46BlRNR-111" value="" style="endArrow=none;dashed=1;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-20.5" y="2271" as="sourcePoint" />
+            <mxPoint x="-20.5" y="1987" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TnxMHJFzGaN-m46BlRNR-112" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-25.25" y="2001" width="10.5" height="208" as="geometry" />
+        </mxCell>
+        <mxCell id="TnxMHJFzGaN-m46BlRNR-113" value="" style="endArrow=none;dashed=1;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="183" y="2269" as="sourcePoint" />
+            <mxPoint x="183" y="1985" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TnxMHJFzGaN-m46BlRNR-114" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="177" y="2003" width="10.5" height="208" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
