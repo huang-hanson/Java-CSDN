@@ -282,6 +282,24 @@
         <mxCell id="TnxMHJFzGaN-m46BlRNR-99" value="P6" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="294" y="1571" width="60" height="30" as="geometry" />
         </mxCell>
+        <mxCell id="TnxMHJFzGaN-m46BlRNR-100" value="P1执行" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-360" y="1697.5" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="TnxMHJFzGaN-m46BlRNR-101" value="P2执行" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-230" y="1695.5" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="TnxMHJFzGaN-m46BlRNR-102" value="P3执行" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-106" y="1703.5" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="TnxMHJFzGaN-m46BlRNR-103" value="P4执行" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="3" y="1703.5" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="TnxMHJFzGaN-m46BlRNR-104" value="P5执行" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="123" y="1703.5" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="TnxMHJFzGaN-m46BlRNR-105" value="P6执行" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="245" y="1703.5" width="60" height="30" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
