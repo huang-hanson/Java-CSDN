@@ -387,6 +387,12 @@
         <mxCell id="TnxMHJFzGaN-m46BlRNR-125" value="3:Balance" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="-216" y="2069" width="71" height="26" as="geometry" />
         </mxCell>
+        <mxCell id="TnxMHJFzGaN-m46BlRNR-126" value="4:withdraw(transID)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-241" y="2122" width="122" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="TnxMHJFzGaN-m46BlRNR-127" value="5:deposit(transID)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-234" y="2170" width="113" height="26" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
