@@ -1,0 +1,111 @@
+server:
+  port: 25001
+
+spring:
+  # sharding-jdbc配置
+  shardingsphere:
+    # 是否开启SQL显示
+    props:
+      sql:
+        show: true
+    # ====================== 数据源配置 ======================
+    datasource:
+      names: order_master_0,order_slave_0,order_master_1,order_slave_1
+      # ====================== 配置第1个主从库 ======================
+      # 主库0
+      order_master_0:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://localhost:3306/order?serverTimezone=Asia/Shanghai&useSSL=false&zeroDateTimeBehavior=convertToNull&characterEncoding=utf-8
+        username: root
+        password: 123456
+      # 从库0
+      order_slave_0:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://localhost:3306/order?serverTimezone=Asia/Shanghai&useSSL=false&zeroDateTimeBehavior=convertToNull&characterEncoding=utf-8
+        username: root
+        password: 123456
+      # ====================== 配置第2个主从库 ======================
+      # 主库1
+      order_master_1:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://localhost:3306/order?serverTimezone=Asia/Shanghai&useSSL=false&zeroDateTimeBehavior=convertToNull&characterEncoding=utf-8
+        username: root
+        password: 123456
+      # 从库1
+      order_slave_1:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://localhost:3306/order?serverTimezone=Asia/Shanghai&useSSL=false&zeroDateTimeBehavior=convertToNull&characterEncoding=utf-8
+        username: root
+        password: 123456
+    rules:
+      # ====================== 读写分离配置 ======================
+      readwrite-splitting:
+        data-sources:
+          order_0:
+            props:
+              # 主库
+              write-data-source-name: order_master_0
+              # 从库
+              read-data-source-names: order_slave_0
+              # 从库查询数据的负载均衡算法 目前有2种算法 round_robin（轮询）和 random（随机）
+              # 算法接口 {@link org.apache.shardingsphere.spi.masterslave.MasterSlaveLoadBalanceAlgorithm}
+              # 实现类 RandomMasterSlaveLoadBalanceAlgorithm 和 RoundRobinMasterSlaveLoadBalanceAlgorithm
+            load-balancer-name: RANDOM
+            type: Static
+          order_1:
+            props:
+              write-data-source-name: order_master_1
+              read-data-source-names: order_slave_1
+            load-balancer-name: RANDOM
+            type: Static
+        load-balancers:
+          RANDOM:
+            type: RANDOM
+      # ====================== 分库分表配置 ======================
+      sharding:
+        tables:
+          # 分表规则：在使用 ShardingSphere 时，
+          t_order_info:
+            # 例如下面这个解释：
+            # 第一部分：order_${0..15}
+            # 表示生成 16个逻辑表（从0到15） 实际生成的表名会是： order_0 order_1 ... order_15
+            #
+            # 第二部分：t_order_info${(1..1000).collect{t ->t.toString().padLeft(4,'0')}}
+            # 更复杂的动态生成规则，分解如下：
+            #    1..1000：生成1到1000的数字序列
+            #    .collect{t -> ... }：对每个数字进行格式化处理
+            #    t.toString().padLeft(4,'0')：将数字转换为4位宽度，不足补零
+            # 实际生成的表后缀会是：t_order_info0001 t_order_info0002 ... t_order_info0999 t_order_info1000
+            #
+            # 组合后的完整含义
+            # 这个表达式会生成 16（前半部分） × 1000（后半部分） = 16,000个物理表，格式为：
+            # order_0.t_order_info0001 order_0.t_order_info0002 ... order_15.t_order_info0999 order_15.t_order_info1000
+            #
+            # actual-data-nodes: order_${0..15}.t_order_info${(1..1000).collect{t ->t.toString().padLeft(4,'0')}}
+
+            # 下面写一个简单的demo，两个数据库，每个数据库有10个表，共20个表
+            actual-data-nodes: order_${0..1}.t_order_info${(1..10).collect{t ->t.toString().padLeft(2,'0')}}
+            # 分库规则：根据 user_id 的值，将数据存储到不同的数据库中
+            database-strategy:
+              standard:
+                sharding-column: orderid
+                # 分库算法
+                sharding-algorithm-name: delivery
+            # 分表规则：根据 user_id 的值，将数据存储到不同的表中
+            table-strategy:
+              standard:
+                sharding-column: orderid
+                # 分表算法
+                sharding-algorithm-name: delivery
+        sharding-algorithms:
+          # 分库算法
+          delivery:
+            type: CLASS_BASED
+            props:
+              strategy: STANDARD
+              # 自定义分库算法实现类
+              algorithmClassName: com.demo.shardingsphere.algo.DeliveryShardingAlgorithm

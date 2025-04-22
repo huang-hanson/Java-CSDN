@@ -1,0 +1,75 @@
+server:
+  port: 25000
+
+spring:
+  # sharding-jdbc配置
+  shardingsphere:
+    # 是否开启SQL显示
+    props:
+      sql:
+        show: true
+    # ====================== 数据源配置 ======================
+    datasource:
+      names: db0,db1,db2
+      db0:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://localhost:3306/db0?serverTimezone=Asia/Shanghai&useSSL=false&zeroDateTimeBehavior=convertToNull&characterEncoding=utf-8
+        username: root
+        password: 123456
+        maximum-pool-size: 3
+        minimum-idle: 1
+      db1:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://localhost:3306/db1?serverTimezone=Asia/Shanghai&useSSL=false&zeroDateTimeBehavior=convertToNull&characterEncoding=utf-8
+        username: root
+        password: 123456
+        maximum-pool-size: 3
+        minimum-idle: 1
+      db2:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://localhost:3306/db2?serverTimezone=Asia/Shanghai&useSSL=false&zeroDateTimeBehavior=convertToNull&characterEncoding=utf-8
+        username: root
+        password: 123456
+        maximum-pool-size: 3
+        minimum-idle: 1
+    rules:
+      sharding:
+        tables:
+          # 分表规则：在使用 ShardingSphere 时，
+          # t_user_info 是一个逻辑表（logical table），它本身并不真实存在于某一个数据库中，而是由多张 实际表（physical table） 组成。
+          # ShardingSphere 会帮你把对逻辑表的操作自动映射到实际表上。
+          # 比如将t_user_info数据映射到下面表中：
+          # db0.user_info_0 ～ db0.user_info_19
+          # db1.user_info_0 ～ db1.user_info_19
+          # db2.user_info_0 ～ db2.user_info_19
+          t_user_info:
+            actual-data-nodes: db$->{0..2}.user_info_$->{0..19}
+            # 分库规则：根据 user_id 的值，将数据存储到不同的数据库中
+            database-strategy:
+              standard:
+                sharding-column: user_id
+                # 分库算法
+                sharding-algorithm-name: database-inline-user-id
+            # 分表规则：根据 user_id 的值，将数据存储到不同的表中
+            table-strategy:
+              standard:
+                sharding-column: user_id
+                # 分表算法
+                sharding-algorithm-name: t-inline
+            # 主键生成策略：根据 id 的值，生成主键，默认使用雪花算法
+            key-generate-strategy:
+              column: id
+        sharding-algorithms: 
+          # 分库算法
+          database-inline-user-id:
+            type: INLINE            
+            props:
+              algorithm-expression: db$->{user_id % 3}
+          # 分表算法
+          t-inline:
+            type: INLINE
+            props:
+              algorithm-expression: user_info_$->{user_id % 20}

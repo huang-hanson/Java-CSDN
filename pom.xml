@@ -28,6 +28,7 @@
         <module>grpc-test</module>
         <module>nacos</module>
         <module>design-patterns</module>
+        <module>shardingsphere-demo</module>
     </modules>
 
     <groupId>com.csdn.dev</groupId>
