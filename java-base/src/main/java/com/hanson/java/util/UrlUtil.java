@@ -23,16 +23,13 @@ public class UrlUtil {
     private static final Pattern URL_PATTERN = Pattern.compile("^(https?|ftp)://[^\\s/$.?#].[^\\s]*$", Pattern.CASE_INSENSITIVE);
 
     public String decodeIfUrl(String input) {
-        if (isUrl(input)) {
-            try {
-                // URL 解码
-                return URLDecoder.decode(input, StandardCharsets.UTF_8.name());
-            } catch (Exception e) {
-                // 解码失败返回原始内容
-                return input;
-            }
+        try {
+            // URL 解码
+            return URLDecoder.decode(input, StandardCharsets.UTF_8.name());
+        } catch (Exception e) {
+            // 解码失败返回原始内容
+            return input;
         }
-        return input;
     }
 
     public boolean isUrl(String str) {
