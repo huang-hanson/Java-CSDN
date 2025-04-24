@@ -1,9 +1,66 @@
-<mxfile host="app.diagrams.net" modified="2025-04-24T14:49:50.742Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36" etag="lehR4xMw0vVcNuoXnRA9" version="24.4.0" type="github">
+<mxfile host="app.diagrams.net" modified="2025-04-24T14:56:29.120Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36" etag="YBUVe1dMjAce-7Nq4eXR" version="24.4.0" type="github">
   <diagram name="第 1 页" id="1uNlaU1yq12I6MSPl8Er">
     <mxGraphModel dx="767" dy="1131" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="vLDg6hRGlnBe5T-3AFMx-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;strokeWidth=2;" edge="1" parent="1" source="vLDg6hRGlnBe5T-3AFMx-1" target="vLDg6hRGlnBe5T-3AFMx-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vLDg6hRGlnBe5T-3AFMx-1" value="SQLParseEngine&lt;div style=&quot;font-size: 17px;&quot;&gt;解析引擎&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=17;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="120" y="320" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="vLDg6hRGlnBe5T-3AFMx-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;strokeWidth=2;" edge="1" parent="1" source="vLDg6hRGlnBe5T-3AFMx-2" target="vLDg6hRGlnBe5T-3AFMx-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vLDg6hRGlnBe5T-3AFMx-2" value="ShardingRouteEngine&lt;div style=&quot;font-size: 17px;&quot;&gt;路由引擎&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=17;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="120" y="480" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="vLDg6hRGlnBe5T-3AFMx-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=2;" edge="1" parent="1" source="vLDg6hRGlnBe5T-3AFMx-3" target="vLDg6hRGlnBe5T-3AFMx-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vLDg6hRGlnBe5T-3AFMx-3" value="SQLRewriteEngine&lt;div style=&quot;font-size: 17px;&quot;&gt;改写引擎&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=17;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="120" y="640" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="vLDg6hRGlnBe5T-3AFMx-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=2;" edge="1" parent="1" source="vLDg6hRGlnBe5T-3AFMx-4" target="vLDg6hRGlnBe5T-3AFMx-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vLDg6hRGlnBe5T-3AFMx-4" value="ExecutorEngine&lt;div style=&quot;font-size: 17px;&quot;&gt;执行引擎&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=17;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="120" y="800" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="vLDg6hRGlnBe5T-3AFMx-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeWidth=2;" edge="1" parent="1" source="vLDg6hRGlnBe5T-3AFMx-5" target="vLDg6hRGlnBe5T-3AFMx-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vLDg6hRGlnBe5T-3AFMx-5" value="SQL解析" style="rounded=1;whiteSpace=wrap;html=1;fontSize=17;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="440" y="330" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vLDg6hRGlnBe5T-3AFMx-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeWidth=2;" edge="1" parent="1" source="vLDg6hRGlnBe5T-3AFMx-6" target="vLDg6hRGlnBe5T-3AFMx-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vLDg6hRGlnBe5T-3AFMx-6" value="SQL路由" style="rounded=1;whiteSpace=wrap;html=1;fontSize=17;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="440" y="490" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vLDg6hRGlnBe5T-3AFMx-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=2;" edge="1" parent="1" source="vLDg6hRGlnBe5T-3AFMx-7" target="vLDg6hRGlnBe5T-3AFMx-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vLDg6hRGlnBe5T-3AFMx-7" value="SQL改写" style="rounded=1;whiteSpace=wrap;html=1;fontSize=17;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="440" y="650" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vLDg6hRGlnBe5T-3AFMx-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=2;" edge="1" parent="1" source="vLDg6hRGlnBe5T-3AFMx-8" target="vLDg6hRGlnBe5T-3AFMx-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vLDg6hRGlnBe5T-3AFMx-8" value="SQL执行" style="rounded=1;whiteSpace=wrap;html=1;fontSize=17;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="440" y="810" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vLDg6hRGlnBe5T-3AFMx-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=2;" edge="1" parent="1" source="vLDg6hRGlnBe5T-3AFMx-9" target="vLDg6hRGlnBe5T-3AFMx-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vLDg6hRGlnBe5T-3AFMx-9" value="MergeEngine&lt;div style=&quot;font-size: 17px;&quot;&gt;归并引擎&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=17;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="120" y="960" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="vLDg6hRGlnBe5T-3AFMx-10" value="结果归并" style="rounded=1;whiteSpace=wrap;html=1;fontSize=17;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="440" y="970" width="120" height="60" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
