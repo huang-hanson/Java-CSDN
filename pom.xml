@@ -29,6 +29,7 @@
         <module>nacos</module>
         <module>design-patterns</module>
         <module>shardingsphere-demo</module>
+        <module>algo</module>
     </modules>
 
     <groupId>com.csdn.dev</groupId>
