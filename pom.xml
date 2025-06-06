@@ -30,6 +30,8 @@
         <module>design-patterns</module>
         <module>shardingsphere-demo</module>
         <module>algo</module>
+        <module>file-import-export</module>
+        <module>rabbitmq-demo</module>
     </modules>
 
     <groupId>com.csdn.dev</groupId>
