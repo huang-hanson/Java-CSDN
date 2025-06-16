@@ -1,4 +1,4 @@
-package com.hanson.strategy.enmus;
+package com.csdn.dev.common.enums;
 
 import lombok.Getter;
 

@@ -8,6 +8,7 @@ import com.alibaba.excel.write.style.column.LongestMatchColumnWidthStyleStrategy
 import com.fileimport.export.entity.query.StudentImportQuery;
 import org.apache.poi.ss.usermodel.IndexedColors;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Random;
@@ -24,7 +25,16 @@ public class StudentExcelGenerator {
     private static final AtomicLong STUDENT_NO_COUNTER = new AtomicLong(2023000001L);
 
     public static void main(String[] args) {
-        String fileName = "student_data_3000.xlsx";
+//        String fileName = "student_data_3000.xlsx";  // 完整路径
+        // 指定目标目录（相对或绝对路径）
+        String dirPath = "./file-import-export/src/main/resources/testData/";  // 项目根目录下的 testData 文件夹
+        String fileName = dirPath + "student_data_3000.xlsx";
+
+        // 确保目录存在
+        File dir = new File(dirPath);
+        if (!dir.exists()) {
+            dir.mkdirs();  // 创建多级目录
+        }
 
         // 设置表头样式
         WriteCellStyle headWriteCellStyle = new WriteCellStyle();

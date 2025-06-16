@@ -1,8 +1,8 @@
-package com.hanson.strategy.exception;
+package com.csdn.dev.common.exception;
 
-import com.hanson.strategy.enmus.CommonErrorEnum;
-import com.hanson.strategy.enmus.ErrorEnum;
-import com.hanson.strategy.enmus.ExceptionLogLevelEnum;
+import com.csdn.dev.common.enums.CommonErrorEnum;
+import com.csdn.dev.common.enums.ErrorEnum;
+import com.csdn.dev.common.enums.ExceptionLogLevelEnum;
 import lombok.Getter;
 
 import java.text.MessageFormat;
@@ -28,21 +28,12 @@ public class BaseException extends RuntimeException{
 
     private Object resultBody = null;
 
-    /**
-     * 异常时需要返回的resultBody
-     * @param result 返回的body
-     * @author linton.cao
-     * @date 2021/9/8 16:29
-     */
+
     public void setResultBody(Object result){
         this.resultBody = result;
     }
 
-    /**
-     * 默认错误
-     * @author linton.cao
-     * @date 2021/9/2 13:33
-     */
+
     public BaseException() {
         super(CommonErrorEnum.SYSTEM_ERROR.getCodeStr());
         this.errorEnum = CommonErrorEnum.SYSTEM_ERROR;

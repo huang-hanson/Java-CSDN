@@ -1,0 +1,28 @@
+CREATE TABLE `t_student_info`
+(
+    `id`               bigint      NOT NULL AUTO_INCREMENT COMMENT '学生ID',
+    `student_no`       varchar(32) NOT NULL COMMENT '学号',
+    `name`             varchar(64) NOT NULL COMMENT '学生姓名',
+    `gender`           tinyint              DEFAULT '0' COMMENT '性别（0-女，1-男）',
+    `birthday`         date                 DEFAULT NULL COMMENT '出生日期',
+    `id_card`          varchar(18)          DEFAULT NULL COMMENT '身份证号',
+    `department_id`    bigint               DEFAULT NULL COMMENT '所属院系ID',
+    `major_id`         bigint               DEFAULT NULL COMMENT '所属专业ID',
+    `class_name`       varchar(64)          DEFAULT NULL COMMENT '班级名称',
+    `enrollment_year`  int                  DEFAULT NULL COMMENT '入学年份',
+    `status`           tinyint              DEFAULT '0' COMMENT '学生状态（0-在读，1-休学，2-退学，3-毕业）',
+    `phone`            varchar(20)          DEFAULT NULL COMMENT '联系电话',
+    `email`            varchar(128)         DEFAULT NULL COMMENT '电子邮箱',
+    `address`          varchar(255)         DEFAULT NULL COMMENT '家庭住址',
+    `political_status` tinyint              DEFAULT '0' COMMENT '政治面貌（0-群众，1-团员，2-党员）',
+    `nationality`      varchar(32)          DEFAULT NULL COMMENT '民族',
+    `create_time`      datetime    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`      datetime    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `deleted`          tinyint     NOT NULL DEFAULT '0' COMMENT '逻辑删除标志（0-未删除，1-已删除）',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uk_student_no` (`student_no`),
+    KEY                `idx_department_id` (`department_id`),
+    KEY                `idx_major_id` (`major_id`),
+    KEY                `idx_name` (`name`),
+    KEY                `idx_id_card` (`id_card`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='学生信息表';

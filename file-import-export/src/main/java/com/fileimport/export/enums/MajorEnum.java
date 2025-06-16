@@ -19,4 +19,22 @@ public enum MajorEnum {
         this.name = name;
         this.code = code;
     }
+
+    public static MajorEnum getEnumByName(String name) {
+        for (MajorEnum majorEnum : MajorEnum.values()) {
+            if (majorEnum.getName().equals(name)) {
+                return majorEnum;
+            }
+        }
+        return null;
+    }
+
+    public static MajorEnum getEnumByCode(Integer code) {
+        for (MajorEnum majorEnum : MajorEnum.values()) {
+            if (majorEnum.getCode().equals(code)) {
+                return majorEnum;
+            }
+        }
+        return null;
+    }
 }

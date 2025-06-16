@@ -55,12 +55,12 @@ public class StudentInfoBO implements Serializable {
     /**
      * 所属院系ID
      */
-    private Long departmentId;
+    private Integer departmentId;
 
     /**
      * 所属专业ID
      */
-    private Long majorId;
+    private Integer majorId;
 
     /**
      * 班级名称
