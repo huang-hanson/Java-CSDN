@@ -22,7 +22,7 @@ public class Consumer {
     //设置为云消息队列 RabbitMQ 版实例的静态用户名密码。
     public static final String password = "xxx";
     //设置为云消息队列 RabbitMQ 版实例的Vhost名称。
-    public static final String virtualHost = "51job";
+    public static final String virtualHost = "xxx";
 
     //如果使用5671端口，需要enableSSL设置为true。
     public static final int port = 5672;
@@ -42,15 +42,16 @@ public class Consumer {
         channel.basicQos(50);
 
         //设置为云消息队列 RabbitMQ 版实例的Queue名称。需要和生产者中设置的Queue名称一致。
-        Consumer consumer = new Consumer(channel, "51job-track-callback-match");
+        Consumer consumer = new Consumer(channel, "51job-apptrack-callback-conf");
 
         consumer.consume();
     }
 
     public void consume() throws IOException, InterruptedException {
         channel.basicConsume(queue, false, "yourConsumerTag", new DefaultConsumer(channel) {
-            @Override public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties,
-                                                 byte[] body) throws IOException {
+            @Override
+            public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties,
+                                       byte[] body) throws IOException {
 
                 //业务处理。
                 System.out.println("receive: msgId=" + properties.getMessageId());
