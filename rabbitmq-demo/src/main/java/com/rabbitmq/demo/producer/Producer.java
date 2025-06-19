@@ -18,11 +18,11 @@ import java.util.concurrent.TimeoutException;
 
 public class Producer {
     //设置为云消息队列 RabbitMQ 版实例的接入点。
-    public static final String hostName = "xxx";
+    public static final String hostName = "rabbitmq-cn-cfn4ai6cm06.cn-shanghai.amqp-10.vpc.mq.amqp.aliyuncs.com";
     //设置为云消息队列 RabbitMQ 版实例的静态用户名。
-    public static final String userName = "xxx";
+    public static final String userName = "MjpyYWJiaXRtcS1jbi1jZm40YWk2Y20wNjpMVEFJNXRGVGJoODVzcTJkOWVWNEFLQzc=";
     //设置为云消息队列 RabbitMQ 版实例的静态用户名密码。
-    public static final String password = "xxx";
+    public static final String password = "MTMzN0YxQjJERDE4QjI1M0M3NkE0NkQ2QTQyQzAyNEIyRkIxNzgwNToxNzQ5MDMyODI1NTA5";
     //设置为云消息队列 RabbitMQ 版实例的Vhost名称。
     public static final String virtualHost = "51job";
 

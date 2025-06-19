@@ -17,12 +17,12 @@ import java.util.concurrent.TimeoutException;
  **/
 public class RabbitMQConsumer {
 
-    private final static String HOST = "xxx";
+    private final static String HOST = "rabbitmq-cn-cfn4ai6cm06.cn-shanghai.amqp-10.vpc.mq.amqp.aliyuncs.com";
     private final static int PORT = 5672;
-    private final static String USERNAME = "xxx";    // 替换为你的用户名
-    private final static String PASSWORD = "xxx"; // 替换为你的密码
-    private final static String QUEUE_NAME = "xxx";
-    private final static String VIRTUAL_HOST = "xxx"; // 替换为你的VHost名称
+    private final static String USERNAME = "MjpyYWJiaXRtcS1jbi1jZm40YWk2Y20wNjpMVEFJNXRGVGJoODVzcTJkOWVWNEFLQzc=";    // 替换为你的用户名
+    private final static String PASSWORD = "MTMzN0YxQjJERDE4QjI1M0M3NkE0NkQ2QTQyQzAyNEIyRkIxNzgwNToxNzQ5MDMyODI1NTA5"; // 替换为你的密码
+    private final static String QUEUE_NAME = "51job-apptrack-callback-conf2";
+    private final static String VIRTUAL_HOST = "51job"; // 替换为你的VHost名称
 
 //    private final static String HOST = "xxx";
 //    private final static int PORT = 5672;

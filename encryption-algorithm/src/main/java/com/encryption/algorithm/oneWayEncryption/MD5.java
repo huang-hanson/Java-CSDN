@@ -59,7 +59,10 @@ public class MD5 {
         System.out.println(generateMD5("xhs_hss_ios21"));
         System.out.println(generateMD5("xhs_hss_andriod"));
         System.out.println(generateMD5("00000000-0000-0000-0000-000000000000"));
-        System.out.println(generateMD5("00000000-0000-0000-0000-000000000000").toUpperCase());
+        System.out.println(generateMD5("000094938c67c703"));
+        System.out.println(generateMD5("00013CB7-a54a-471f-97b7-587d494442f4".toUpperCase()));
+        System.out.println(generateMD5("fffffff5-deff-9ab5-fdbf-97ffbffd88ab"));
+        System.out.println(generateMD5("00013CB7-a54a-471f-97b7-587d494442f4".toLowerCase()));
     }
 
 

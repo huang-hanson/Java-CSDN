@@ -16,13 +16,16 @@ import java.util.concurrent.TimeoutException;
 
 public class Consumer {
     //设置为云消息队列 RabbitMQ 版实例的接入点。
-    public static final String hostName = "xxx";
+    public static final String hostName = "10.100.2.168";
     //设置为云消息队列 RabbitMQ 版实例的静态用户名。
-    public static final String userName = "xxx";
+    public static final String userName = "51job_msguse";
     //设置为云消息队列 RabbitMQ 版实例的静态用户名密码。
-    public static final String password = "xxx";
+    public static final String password = "51job_msguse";
+//    public static final String hostName = "rabbitmq-cn-cfn4ai6cm06.cn-shanghai.amqp-10.vpc.mq.amqp.aliyuncs.com";
+//    public static final String userName = "MjpyYWJiaXRtcS1jbi1jZm40YWk2Y20wNjpMVEFJNXRGVGJoODVzcTJkOWVWNEFLQzc=";
+//    public static final String password = "MTMzN0YxQjJERDE4QjI1M0M3NkE0NkQ2QTQyQzAyNEIyRkIxNzgwNToxNzQ5MDMyODI1NTA5";
     //设置为云消息队列 RabbitMQ 版实例的Vhost名称。
-    public static final String virtualHost = "xxx";
+    public static final String virtualHost = "51job";
 
     //如果使用5671端口，需要enableSSL设置为true。
     public static final int port = 5672;
@@ -42,7 +45,7 @@ public class Consumer {
         channel.basicQos(50);
 
         //设置为云消息队列 RabbitMQ 版实例的Queue名称。需要和生产者中设置的Queue名称一致。
-        Consumer consumer = new Consumer(channel, "51job-apptrack-callback-conf");
+        Consumer consumer = new Consumer(channel, "51job-apptrack-callback-conf2");
 
         consumer.consume();
     }
