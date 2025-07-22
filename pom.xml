@@ -32,6 +32,7 @@
         <module>algo</module>
         <module>file-import-export</module>
         <module>rabbitmq-demo</module>
+        <module>excel-export</module>
     </modules>
 
     <groupId>com.csdn.dev</groupId>
