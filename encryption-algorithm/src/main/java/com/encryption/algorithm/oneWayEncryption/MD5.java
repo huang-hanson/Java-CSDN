@@ -63,6 +63,7 @@ public class MD5 {
         System.out.println(generateMD5("00013CB7-a54a-471f-97b7-587d494442f4".toUpperCase()));
         System.out.println(generateMD5("fffffff5-deff-9ab5-fdbf-97ffbffd88ab"));
         System.out.println(generateMD5("00013CB7-a54a-471f-97b7-587d494442f4".toLowerCase()));
+        System.out.println(generateMD5("46EA33670C884D7297AC096863606493efb197cea5c120d351b38a97b55d9331"));
     }
 
 
