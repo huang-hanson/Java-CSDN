@@ -1,19 +1,79 @@
 graph TD
-    A[开始] --> B[语句1]
-    B --> C{判断1}
-    C -- Y --> D[语句2]
-    C -- N --> G
-    D --> E{判断2}
-    E -- Y --> F{判断3}
-    E -- N --> H[语句3]
+    A[blackorWhite方法开始<br/>接收AccountLockParamDTO参数] --> B[验证status参数<br/>检查是否在允许范围内<br/>1,2,3,4,5,6]
+    B --> C{status参数是否合法?}
+    C -->|否| D[记录错误日志<br/>throw CInternalApiException<br/>msg:打黑打白时，传入的参数不合法<br/>status只能是1,2,3,4,5,6<br/>结束]
+C -->|是|E[调用resumeService.getAccountInfoBy51job<br/>传入accountid获取账户信息]
+E --> F[获取账户锁定状态和来源信息<br/>lockStatus, fromBu等]
+F --> G[初始化blackLockStatus=false<br/>解析accountInfoBy51job<br/>提取islock和from_bu字段]
+G --> H{accountInfoBy51job是否为空或空map?}
+H -->|是| I[lockStatus="", fromBu="", blackLockStatus=false]
+H -->|否|J[从accountDetails中获取islock值]
+I --> K[继续执行后续逻辑]
+J --> L{islock字段是否存在?}
+L -->|否|M[lockStatus=""<br/>fromBu=""<br/>blackLockStatus=false]
+L -->|是|N[lockStatus = accountDetails.get('islock').toString()]
+M --> O[检查from_bu字段]
+N --> P{from_bu字段是否存在?}
+P -->|否| Q[fromBu=""]
+P -->|是|R[fromBu = accountDetails.get('from_bu').toString()]
+Q --> S[检查是否为black锁状态]
+R --> S
+S --> T{lockStatus是否等于BLACK_LOCK_STATUS?}
+T -->|是|U[blackLockStatus=true]
+T -->|否|V[blackLockStatus=false]
+U --> W[检查打黑限制条件]
+V --> W
+W --> X[检查status为5且来源不是51job的限制]
+X --> Y{status为5且fromBu不为51job?}
+Y -->|是|Z[记录错误日志<br/>throw CInternalApiException<br/>msg:用户为{fromBu}平台,无法打黑（强制实名）<br/>结束]
+Y -->|否|AA[检查特殊条件<br/>fromtag为1且lockStatus为4?]
+Z --> FF{异常处理}
+FF --> GG[返回错误响应]
+AA --> BB{fromtag为1且lockStatus为4?}
+BB -->|是|CC[直接返回，不执行后续操作<br/>结束]
+BB -->|否|DD[检查contactflag是否为空]
+CC --> HH[方法结束]
+DD --> EE{contactflag是否为空?}
+EE -->|否|II[跳过联系方式处理<br/>直接进入vapi锁定流程]
+EE -->|是|JJ[调用userClient.getUserInfo<br/>传入Integer.valueOf(accountid)<br/>获取用户手机号信息]
+JJ --> KK{getUserInfo调用是否成功?}
+KK -->|否|LL[记录错误日志<br/>throw CInternalApiException<br/>msg:获取用户信息失败<br/>结束]
+KK -->|是|MM[获取用户手机号<br/>userInfo.getResultbody().getMobilePhone()]
+LL --> FF
+MM --> NN{手机号是否为空?}
+NN -->|是| II
+NN -->|否|OO[判断是否打黑还是打白<br/>根据status字段]
+OO --> PP{status为3或4时打白<br/>其他情况打黑?}
+PP -->|打白|QQ[cBlack = "0"]
+PP -->|打黑|RR[cBlack = "1"]
+QQ --> SS[创建BlackWhiteDTO对象<br/>设置相关参数]
+RR --> SS
+SS --> TT[设置BlackWhiteDTO参数:<br/>batchlock='1'<br/>contact=mobilePhone<br/>c_black=cBlack<br/>deal_type=status<br/>source,oprid,memo等]
+TT --> UU[调用this.changeContactStatus<br/>处理联系方式黑白名单]
+UU --> II
+II --> VV[确定锁定原因<br/>调用determineLockReason方法]
+VV --> WW[确定锁定状态<br/>调用determineLockStatus方法]
+WW --> XX[构建vapi调用参数<br/>创建dataMap]
+XX --> YY[dataMap.put('accountid', accountid)<br/>dataMap.put('lock', lockStatus)<br/>dataMap.put('reason', reason)<br/>dataMap.put('usertoken', '')]
+YY --> ZZ[创建VapiQuery对象<br/>设置data和sign]
+ZZ --> AAA[调用vapiClient.vapiLockResume<br/>执行账户锁定操作]
+AAA --> BBB{vapi调用是否成功?<br/>status是否为'1'?}
+BBB -->|否|CCC[记录错误日志<br/>throw CInternalApiException<br/>msg:更新51job账号黑名单失败<br/>结束]
+BBB -->|是|DDD[创建UserOpLog对象<br/>记录操作日志]
+CCC --> FF
+DDD --> EEE[设置UserOpLog字段:<br/>accountid=Long.parseLong(accountid)<br/>resumeid=resumeid或null<br/>usertype=userType<br/>type=Integer.parseInt(status)<br/>memo,oprid,source等]
+EEE --> FFF[设置时间戳:<br/>createAt=LocalDateTime.now()<br/>updateAt=LocalDateTime.now()]
+FFF --> GGG[调用userOpLogRepository.insertUserOpLog<br/>保存操作日志到数据库]
+GGG --> HHH{插入日志是否成功?}
+HHH -->|否|III[记录日志保存失败错误<br/>但不中断主流程]
+HHH -->|是|JJJ[流程完成<br/>方法正常结束]
+III --> JJJ
+III --> KKK[继续执行不影响主流程]
+JJJ --> LLL[方法结束]
 
-    // 修改：语句3直接指向语句5
-    H --> K[语句5]
-    // 修改：判断3如果是Y则返回到判断1
-    F -- Y --> C
-    // 修改：语句4直接指向语句5
-    F -- N --> I[语句4]
-    I --> K
-
-    K --> L[语句6]
-    L --> M[结束]
+D --> FF
+GG --> LLL
+HH --> LLL
+III --> LLL
+KKK --> LLL
+LLL --> MMM[接口响应完成]
