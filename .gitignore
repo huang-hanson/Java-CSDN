@@ -26,3 +26,5 @@ build/
 /logs
 
 .flattened-pom.xml
+
+/mall-system/
