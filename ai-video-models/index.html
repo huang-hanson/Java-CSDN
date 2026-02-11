@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Video Generation Models Directory</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <span class="logo-icon">🎬</span>
+                <span class="logo-text">AI Video Models</span>
+            </div>
+            <div class="nav-links">
+                <a href="#models">Models</a>
+                <a href="#comparison">Comparison</a>
+                <a href="#resources">Resources</a>
+            </div>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search models..." class="search-input">
+                <button class="search-btn">🔍</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>AI Video Generation Models Directory</h1>
+            <p>Discover the best AI-powered video generation tools and models available today</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">15+</span>
+                    <span class="stat-label">Models Listed</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">2024</span>
+                    <span class="stat-label">Latest Update</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">Free</span>
+                    <span class="stat-label">To Access</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="filters">
+            <div class="filter-group">
+                <label>Category:</label>
+                <select id="categoryFilter" class="filter-select">
+                    <option value="all">All Categories</option>
+                    <option value="text-to-video">Text to Video</option>
+                    <option value="image-to-video">Image to Video</option>
+                    <option value="video-to-video">Video to Video</option>
+                    <option value="avatar">AI Avatar</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Pricing:</label>
+                <select id="pricingFilter" class="filter-select">
+                    <option value="all">All Pricing</option>
+                    <option value="free">Free</option>
+                    <option value="freemium">Freemium</option>
+                    <option value="paid">Paid</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Sort by:</label>
+                <select id="sortFilter" class="filter-select">
+                    <option value="popularity">Popularity</option>
+                    <option value="name">Name (A-Z)</option>
+                    <option value="rating">Rating</option>
+                </select>
+            </div>
+        </section>
+
+        <section id="models" class="models-grid">
+            <!-- Sora -->
+            <article class="model-card" data-category="text-to-video" data-pricing="paid" data-rating="5" data-popularity="100">
+                <div class="card-header">
+                    <div class="model-logo" style="background: linear-gradient(135deg, #10a37f, #1a7f64);">
+                        <span>S</span>
+                    </div>
+                    <div class="model-info">
+                        <h3>Sora</h3>
+                        <span class="company">OpenAI</span>
+                    </div>
+                    <span class="badge paid">Paid</span>
+                </div>
+                <p class="description">OpenAI's flagship text-to-video model capable of generating realistic and imaginative scenes from text instructions. Creates videos up to 60 seconds with remarkable detail.</p>
+                <div class="features">
+                    <span class="feature">Text to Video</span>
+                    <span class="feature">60s Duration</span>
+                    <span class="feature">HD Quality</span>
+                </div>
+                <div class="card-footer">
+                    <div class="rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-text">5.0</span>
+                    </div>
+                    <a href="https://openai.com/sora" target="_blank" class="visit-btn">Visit →</a>
+                </div>
+            </article>
+
+            <!-- Runway Gen-3 -->
+            <article class="model-card" data-category="text-to-video" data-pricing="freemium" data-rating="4.8" data-popularity="95">
+                <div class="card-header">
+                    <div class="model-logo" style="background: linear-gradient(135deg, #7c3aed, #5b21b6);">
+                        <span>R</span>
+                    </div>
+                    <div class="model-info">
+                        <h3>Runway Gen-3 Alpha</h3>
+                        <span class="company">Runway</span>
+                    </div>
+                    <span class="badge freemium">Freemium</span>
+                </div>
+                <p class="description">Advanced video generation model with exceptional motion and physics understanding. Supports text-to-video, image-to-video, and video-to-video transformations.</p>
+                <div class="features">
+                    <span class="feature">Text to Video</span>
+                    <span class="feature">Image to Video</span>
+                    <span class="feature">Motion Brush</span>
+                </div>
+                <div class="card-footer">
+                    <div class="rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-text">4.8</span>
+                    </div>
+                    <a href="https://runwayml.com" target="_blank" class="visit-btn">Visit →</a>
+                </div>
+            </article>
+
+            <!-- Pika -->
+            <article class="model-card" data-category="text-to-video" data-pricing="freemium" data-rating="4.5" data-popularity="90">
+                <div class="card-header">
+                    <div class="model-logo" style="background: linear-gradient(135deg, #ec4899, #be185d);">
+                        <span>P</span>
+                    </div>
+                    <div class="model-info">
+                        <h3>Pika 2.0</h3>
+                        <span class="company">Pika Labs</span>
+                    </div>
+                    <span class="badge freemium">Freemium</span>
+                </div>
+                <p class="description">Fast and creative AI video generator with excellent style control. Features Pikaffects for creative transformations and lip-sync capabilities.</p>
+                <div class="features">
+                    <span class="feature">Text to Video</span>
+                    <span class="feature">Lip Sync</span>
+                    <span class="feature">Style Control</span>
+                </div>
+                <div class="card-footer">
+                    <div class="rating">
+                        <span class="stars">★★★★½</span>
+                        <span class="rating-text">4.5</span>
+                    </div>
+                    <a href="https://pika.art" target="_blank" class="visit-btn">Visit →</a>
+                </div>
+            </article>
+
+            <!-- Kling -->
+            <article class="model-card" data-category="text-to-video" data-pricing="freemium" data-rating="4.7" data-popularity="88">
+                <div class="card-header">
+                    <div class="model-logo" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);">
+                        <span>K</span>
+                    </div>
+                    <div class="model-info">
+                        <h3>Kling</h3>
+                        <span class="company">Kuaishou</span>
+                    </div>
+                    <span class="badge freemium">Freemium</span>
+                </div>
+                <p class="description">Powerful video generation model with impressive motion quality and long-duration support. Creates realistic human movements and expressions.</p>
+                <div class="features">
+                    <span class="feature">Text to Video</span>
+                    <span class="feature">2 min Duration</span>
+                    <span class="feature">Realistic Motion</span>
+                </div>
+                <div class="card-footer">
+                    <div class="rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-text">4.7</span>
+                    </div>
+                    <a href="https://klingai.com" target="_blank" class="visit-btn">Visit →</a>
+                </div>
+            </article>
+
+            <!-- Stable Video Diffusion -->
+            <article class="model-card" data-category="image-to-video" data-pricing="free" data-rating="4.3" data-popularity="85">
+                <div class="card-header">
+                    <div class="model-logo" style="background: linear-gradient(135deg, #f97316, #c2410c);">
+                        <span>SVD</span>
+                    </div>
+                    <div class="model-info">
+                        <h3>Stable Video Diffusion</h3>
+                        <span class="company">Stability AI</span>
+                    </div>
+                    <span class="badge free">Open Source</span>
+                </div>
+                <p class="description">Open-source video generation model from Stability AI. Converts static images into short video clips with customizable motion.</p>
+                <div class="features">
+                    <span class="feature">Image to Video</span>
+                    <span class="feature">Open Source</span>
+                    <span class="feature">Local Run</span>
+                </div>
+                <div class="card-footer">
+                    <div class="rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-text">4.3</span>
+                    </div>
+                    <a href="https://stability.ai" target="_blank" class="visit-btn">Visit →</a>
+                </div>
+            </article>
+
+            <!-- HeyGen -->
+            <article class="model-card" data-category="avatar" data-pricing="freemium" data-rating="4.6" data-popularity="82">
+                <div class="card-header">
+                    <div class="model-logo" style="background: linear-gradient(135deg, #06b6d4, #0891b2);">
+                        <span>H</span>
+                    </div>
+                    <div class="model-info">
+                        <h3>HeyGen</h3>
+                        <span class="company">HeyGen Inc.</span>
+                    </div>
+                    <span class="badge freemium">Freemium</span>
+                </div>
+                <p class="description">Leading AI avatar video generator with realistic lip-sync and natural movements. Perfect for marketing, training, and educational content.</p>
+                <div class="features">
+                    <span class="feature">AI Avatars</span>
+                    <span class="feature">100+ Languages</span>
+                    <span class="feature">Custom Avatar</span>
+                </div>
+                <div class="card-footer">
+                    <div class="rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-text">4.6</span>
+                    </div>
+                    <a href="https://heygen.com" target="_blank" class="visit-btn">Visit →</a>
+                </div>
+            </article>
+
+            <!-- Synthesia -->
+            <article class="model-card" data-category="avatar" data-pricing="paid" data-rating="4.5" data-popularity="80">
+                <div class="card-header">
+                    <div class="model-logo" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9);">
+                        <span>S</span>
+                    </div>
+                    <div class="model-info">
+                        <h3>Synthesia</h3>
+                        <span class="company">Synthesia Ltd</span>
+                    </div>
+                    <span class="badge paid">Paid</span>
+                </div>
+                <p class="description">Enterprise-grade AI video platform with professional avatars. Used by major companies for training, onboarding, and corporate communications.</p>
+                <div class="features">
+                    <span class="feature">AI Avatars</span>
+                    <span class="feature">Templates</span>
+                    <span class="feature">Enterprise</span>
+                </div>
+                <div class="card-footer">
+                    <div class="rating">
+                        <span class="stars">★★★★½</span>
+                        <span class="rating-text">4.5</span>
+                    </div>
+                    <a href="https://synthesia.io" target="_blank" class="visit-btn">Visit →</a>
+                </div>
+            </article>
+
+            <!-- Luma Dream Machine -->
+            <article class="model-card" data-category="text-to-video" data-pricing="freemium" data-rating="4.4" data-popularity="78">
+                <div class="card-header">
+                    <div class="model-logo" style="background: linear-gradient(135deg, #14b8a6, #0d9488);">
+                        <span>L</span>
+                    </div>
+                    <div class="model-info">
+                        <h3>Luma Dream Machine</h3>
+                        <span class="company">Luma AI</span>
+                    </div>
+                    <span class="badge freemium">Freemium</span>
+                </div>
+                <p class="description">High-quality video generation with excellent physics and motion understanding. Known for smooth camera movements and realistic rendering.</p>
+                <div class="features">
+                    <span class="feature">Text to Video</span>
+                    <span class="feature">Image to Video</span>
+                    <span class="feature">Fast Generation</span>
+                </div>
+                <div class="card-footer">
+                    <div class="rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-text">4.4</span>
+                    </div>
+                    <a href="https://lumalabs.ai/dream-machine" target="_blank" class="visit-btn">Visit →</a>
+                </div>
+            </article>
+
+            <!-- Haiper -->
+            <article class="model-card" data-category="text-to-video" data-pricing="freemium" data-rating="4.2" data-popularity="75">
+                <div class="card-header">
+                    <div class="model-logo" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                        <span>H</span>
+                    </div>
+                    <div class="model-info">
+                        <h3>Haiper AI</h3>
+                        <span class="company">Haiper</span>
+                    </div>
+                    <span class="badge freemium">Freemium</span>
+                </div>
+                <p class="description">Emerging video generation platform with strong creative capabilities. Offers text-to-video and image-to-video with good quality output.</p>
+                <div class="features">
+                    <span class="feature">Text to Video</span>
+                    <span class="feature">Image to Video</span>
+                    <span class="feature">Creative Styles</span>
+                </div>
+                <div class="card-footer">
+                    <div class="rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-text">4.2</span>
+                    </div>
+                    <a href="https://haiper.ai" target="_blank" class="visit-btn">Visit →</a>
+                </div>
+            </article>
+
+            <!-- D-ID -->
+            <article class="model-card" data-category="avatar" data-pricing="freemium" data-rating="4.3" data-popularity="72">
+                <div class="card-header">
+                    <div class="model-logo" style="background: linear-gradient(135deg, #6366f1, #4f46e5);">
+                        <span>D</span>
+                    </div>
+                    <div class="model-info">
+                        <h3>D-ID</h3>
+                        <span class="company">D-ID</span>
+                    </div>
+                    <span class="badge freemium">Freemium</span>
+                </div>
+                <p class="description">AI-powered video creation platform specializing in talking avatar videos. Transform photos into lifelike video presenters.</p>
+                <div class="features">
+                    <span class="feature">Photo Animation</span>
+                    <span class="feature">Talking Avatar</span>
+                    <span class="feature">API Access</span>
+                </div>
+                <div class="card-footer">
+                    <div class="rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-text">4.3</span>
+                    </div>
+                    <a href="https://d-id.com" target="_blank" class="visit-btn">Visit →</a>
+                </div>
+            </article>
+
+            <!-- Invideo AI -->
+            <article class="model-card" data-category="text-to-video" data-pricing="freemium" data-rating="4.1" data-popularity="70">
+                <div class="card-header">
+                    <div class="model-logo" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                        <span>I</span>
+                    </div>
+                    <div class="model-info">
+                        <h3>Invideo AI</h3>
+                        <span class="company">Invideo</span>
+                    </div>
+                    <span class="badge freemium">Freemium</span>
+                </div>
+                <p class="description">AI-powered video creation tool that generates complete videos from text prompts. Great for marketing and social media content.</p>
+                <div class="features">
+                    <span class="feature">Text to Video</span>
+                    <span class="feature">Stock Footage</span>
+                    <span class="feature">Voiceover</span>
+                </div>
+                <div class="card-footer">
+                    <div class="rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-text">4.1</span>
+                    </div>
+                    <a href="https://invideo.io" target="_blank" class="visit-btn">Visit →</a>
+                </div>
+            </article>
+
+            <!-- Veed.io -->
+            <article class="model-card" data-category="video-to-video" data-pricing="freemium" data-rating="4.0" data-popularity="68">
+                <div class="card-header">
+                    <div class="model-logo" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
+                        <span>V</span>
+                    </div>
+                    <div class="model-info">
+                        <h3>Veed.io</h3>
+                        <span class="company">Veed</span>
+                    </div>
+                    <span class="badge freemium">Freemium</span>
+                </div>
+                <p class="description">Online video editing platform with AI features including auto-captions, text-to-video, and AI avatars. User-friendly interface.</p>
+                <div class="features">
+                    <span class="feature">Video Editing</span>
+                    <span class="feature">Auto Captions</span>
+                    <span class="feature">AI Avatars</span>
+                </div>
+                <div class="card-footer">
+                    <div class="rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-text">4.0</span>
+                    </div>
+                    <a href="https://veed.io" target="_blank" class="visit-btn">Visit →</a>
+                </div>
+            </article>
+
+            <!-- Minimax -->
+            <article class="model-card" data-category="text-to-video" data-pricing="freemium" data-rating="4.4" data-popularity="85">
+                <div class="card-header">
+                    <div class="model-logo" style="background: linear-gradient(135deg, #0ea5e9, #0284c7);">
+                        <span>M</span>
+                    </div>
+                    <div class="model-info">
+                        <h3>Minimax video-01</h3>
+                        <span class="company">Minimax</span>
+                    </div>
+                    <span class="badge freemium">Freemium</span>
+                </div>
+                <p class="description">High-quality Chinese AI video generation model with impressive motion and detail. Creates cinematic videos with excellent composition.</p>
+                <div class="features">
+                    <span class="feature">Text to Video</span>
+                    <span class="feature">High Quality</span>
+                    <span class="feature">Cinematic</span>
+                </div>
+                <div class="card-footer">
+                    <div class="rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-text">4.4</span>
+                    </div>
+                    <a href="https://minimax.chat" target="_blank" class="visit-btn">Visit →</a>
+                </div>
+            </article>
+
+            <!-- Viggle -->
+            <article class="model-card" data-category="video-to-video" data-pricing="free" data-rating="4.2" data-popularity="75">
+                <div class="card-header">
+                    <div class="model-logo" style="background: linear-gradient(135deg, #a855f7, #9333ea);">
+                        <span>V</span>
+                    </div>
+                    <div class="model-info">
+                        <h3>Viggle AI</h3>
+                        <span class="company">Viggle</span>
+                    </div>
+                    <span class="badge free">Free</span>
+                </div>
+                <p class="description">AI-powered character animation tool that makes any character move and dance. Great for memes and creative content.</p>
+                <div class="features">
+                    <span class="feature">Character Motion</span>
+                    <span class="feature">Dance Animation</span>
+                    <span class="feature">Free to Use</span>
+                </div>
+                <div class="card-footer">
+                    <div class="rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-text">4.2</span>
+                    </div>
+                    <a href="https://viggle.ai" target="_blank" class="visit-btn">Visit →</a>
+                </div>
+            </article>
+
+            <!-- Descript -->
+            <article class="model-card" data-category="video-to-video" data-pricing="freemium" data-rating="4.3" data-popularity="72">
+                <div class="card-header">
+                    <div class="model-logo" style="background: linear-gradient(135deg, #64748b, #475569);">
+                        <span>D</span>
+                    </div>
+                    <div class="model-info">
+                        <h3>Descript</h3>
+                        <span class="company">Descript</span>
+                    </div>
+                    <span class="badge freemium">Freemium</span>
+                </div>
+                <p class="description">AI video editor with innovative text-based editing. Features overdub, eye contact correction, and automatic transcription.</p>
+                <div class="features">
+                    <span class="feature">Text-Based Editing</span>
+                    <span class="feature">Overdub</span>
+                    <span class="feature">Eye Contact</span>
+                </div>
+                <div class="card-footer">
+                    <div class="rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-text">4.3</span>
+                    </div>
+                    <a href="https://descript.com" target="_blank" class="visit-btn">Visit →</a>
+                </div>
+            </article>
+        </section>
+
+        <section id="comparison" class="comparison-section">
+            <h2>Quick Comparison</h2>
+            <div class="comparison-table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Model</th>
+                            <th>Type</th>
+                            <th>Max Duration</th>
+                            <th>Resolution</th>
+                            <th>Pricing</th>
+                            <th>Best For</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Sora</strong></td>
+                            <td>Text-to-Video</td>
+                            <td>60 seconds</td>
+                            <td>Up to 1080p</td>
+                            <td>Paid</td>
+                            <td>Cinematic videos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Runway Gen-3</strong></td>
+                            <td>Multi-modal</td>
+                            <td>10 seconds</td>
+                            <td>Up to 4K</td>
+                            <td>Freemium</td>
+                            <td>Creative professionals</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pika 2.0</strong></td>
+                            <td>Text-to-Video</td>
+                            <td>5 seconds</td>
+                            <td>1080p</td>
+                            <td>Freemium</td>
+                            <td>Quick creative clips</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Kling</strong></td>
+                            <td>Text-to-Video</td>
+                            <td>2 minutes</td>
+                            <td>1080p</td>
+                            <td>Freemium</td>
+                            <td>Long-form content</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Stable Video</strong></td>
+                            <td>Image-to-Video</td>
+                            <td>4 seconds</td>
+                            <td>576x1024</td>
+                            <td>Free</td>
+                            <td>Open source projects</td>
+                        </tr>
+                        <tr>
+                            <td><strong>HeyGen</strong></td>
+                            <td>AI Avatar</td>
+                            <td>Unlimited</td>
+                            <td>Up to 4K</td>
+                            <td>Freemium</td>
+                            <td>Business videos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Luma Dream Machine</strong></td>
+                            <td>Text-to-Video</td>
+                            <td>5 seconds</td>
+                            <td>1080p</td>
+                            <td>Freemium</td>
+                            <td>Smooth motion</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="resources" class="resources-section">
+            <h2>Learning Resources</h2>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">📚</div>
+                    <h3>Getting Started Guide</h3>
+                    <p>Learn the basics of AI video generation and how to write effective prompts.</p>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">🎯</div>
+                    <h3>Prompt Engineering</h3>
+                    <p>Master the art of crafting prompts for better video outputs.</p>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">💡</div>
+                    <h3>Best Practices</h3>
+                    <p>Tips and tricks for getting the most out of AI video tools.</p>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">🔧</div>
+                    <h3>API Integration</h3>
+                    <p>Learn how to integrate AI video generation into your applications.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>AI Video Models Directory</h4>
+                <p>A curated collection of the best AI video generation tools and models.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="#models">All Models</a>
+                <a href="#comparison">Comparison</a>
+                <a href="#resources">Resources</a>
+            </div>
+            <div class="footer-section">
+                <h4>Categories</h4>
+                <a href="#">Text to Video</a>
+                <a href="#">Image to Video</a>
+                <a href="#">AI Avatars</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 AI Video Models Directory. Last updated: February 2024.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
