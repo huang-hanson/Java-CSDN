@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>经典小游戏合集 - 贪吃蛇 & 扫雷</title>
+
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background:#f4f6f9;
+            text-align:center;
+        }
+
+        h1{
+            margin-top:20px;
+        }
+
+        .game-container{
+            margin:40px auto;
+            width:500px;
+            background:#fff;
+            padding:20px;
+            border-radius:10px;
+            box-shadow:0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* 公共按钮 */
+        button{
+            padding:8px 16px;
+            margin:5px;
+            border:none;
+            border-radius:6px;
+            background:#007bff;
+            color:white;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#0056b3;
+        }
+
+        /* 贪吃蛇 */
+        #snakeCanvas{
+            background:#111;
+            margin-top:10px;
+            border-radius:6px;
+        }
+
+        /* 扫雷 */
+        #minesweeper{
+            display:grid;
+            gap:2px;
+            margin-top:10px;
+        }
+
+        .cell{
+            width:30px;
+            height:30px;
+            background:#ccc;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:14px;
+            cursor:pointer;
+            user-select:none;
+        }
+
+        .cell.revealed{
+            background:#e0e0e0;
+            cursor:default;
+        }
+
+        .cell.mine{
+            background:red;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>🎮 经典小游戏合集</h1>
+
+<!-- ================= 贪吃蛇 ================= -->
+<div class="game-container">
+    <h2>🐍 贪吃蛇</h2>
+    <div>得分: <span id="snakeScore">0</span></div>
+    <button onclick="startSnake()">开始 / 重新开始</button>
+    <canvas id="snakeCanvas" width="400" height="400"></canvas>
+</div>
+
+<!-- ================= 扫雷 ================= -->
+<div class="game-container">
+    <h2>💣 扫雷</h2>
+    <div>
+        时间: <span id="mineTime">0</span>s
+        | 剩余雷数: <span id="mineLeft">0</span>
+    </div>
+    <select id="difficulty">
+        <option value="easy">简单 (9x9 10雷)</option>
+        <option value="medium">中等 (12x12 20雷)</option>
+        <option value="hard">困难 (16x16 40雷)</option>
+    </select>
+    <button onclick="startMine()">开始 / 重新开始</button>
+    <div id="minesweeper"></div>
+</div>
+
+<script>
+    /* ============================
+       🐍 贪吃蛇
+    ============================ */
+    const canvas = document.getElementById("snakeCanvas");
+    const ctx = canvas.getContext("2d");
+    const box = 20;
+    let snake, direction, food, snakeInterval, snakeScore, speed;
+
+    function startSnake(){
+        snake = [{x:9*box,y:9*box}];
+        direction = "RIGHT";
+        snakeScore = 0;
+        speed = 150;
+        document.getElementById("snakeScore").innerText = snakeScore;
+        placeFood();
+        clearInterval(snakeInterval);
+        snakeInterval = setInterval(drawSnake, speed);
+    }
+
+    function placeFood(){
+        food = {
+            x: Math.floor(Math.random()*20)*box,
+            y: Math.floor(Math.random()*20)*box
+        };
+    }
+
+    document.addEventListener("keydown", e=>{
+        if(e.key==="ArrowUp" && direction!=="DOWN") direction="UP";
+        if(e.key==="ArrowDown" && direction!=="UP") direction="DOWN";
+        if(e.key==="ArrowLeft" && direction!=="RIGHT") direction="LEFT";
+        if(e.key==="ArrowRight" && direction!=="LEFT") direction="RIGHT";
+    });
+
+    function collision(head){
+        for(let i=0;i<snake.length;i++){
+            if(head.x===snake[i].x && head.y===snake[i].y) return true;
+        }
+        return false;
+    }
+
+    function drawSnake(){
+        ctx.fillStyle="#111";
+        ctx.fillRect(0,0,400,400);
+
+        snake.forEach((s,i)=>{
+            ctx.fillStyle = i===0 ? "lime" : "green";
+            ctx.fillRect(s.x,s.y,box,box);
+        });
+
+        ctx.fillStyle="red";
+        ctx.fillRect(food.x,food.y,box,box);
+
+        let head = {x:snake[0].x, y:snake[0].y};
+
+        if(direction==="UP") head.y -= box;
+        if(direction==="DOWN") head.y += box;
+        if(direction==="LEFT") head.x -= box;
+        if(direction==="RIGHT") head.x += box;
+
+        if(head.x<0 || head.x>=400 || head.y<0 || head.y>=400 || collision(head)){
+            clearInterval(snakeInterval);
+            alert("游戏结束！得分: "+snakeScore);
+            return;
+        }
+
+        if(head.x===food.x && head.y===food.y){
+            snakeScore++;
+            document.getElementById("snakeScore").innerText = snakeScore;
+            placeFood();
+
+            if(speed>70){
+                speed-=5;
+                clearInterval(snakeInterval);
+                snakeInterval = setInterval(drawSnake, speed);
+            }
+        }else{
+            snake.pop();
+        }
+
+        snake.unshift(head);
+    }
+
+    /* ============================
+       💣 扫雷
+    ============================ */
+    let mineGrid, rows, cols, mines, revealedCount, mineTimer, time;
+
+    function startMine(){
+        clearInterval(mineTimer);
+        time=0;
+        document.getElementById("mineTime").innerText=time;
+
+        const diff = document.getElementById("difficulty").value;
+        if(diff==="easy"){ rows=9; cols=9; mines=10; }
+        if(diff==="medium"){ rows=12; cols=12; mines=20; }
+        if(diff==="hard"){ rows=16; cols=16; mines=40; }
+
+        document.getElementById("mineLeft").innerText=mines;
+        revealedCount=0;
+
+        mineGrid=[];
+        for(let r=0;r<rows;r++){
+            mineGrid[r]=[];
+            for(let c=0;c<cols;c++){
+                mineGrid[r][c]={mine:false, revealed:false, count:0};
+            }
+        }
+
+        placeMines();
+        calculateCounts();
+        drawGrid();
+
+        mineTimer=setInterval(()=>{
+            time++;
+            document.getElementById("mineTime").innerText=time;
+        },1000);
+    }
+
+    function placeMines(){
+        let placed=0;
+        while(placed<mines){
+            let r=Math.floor(Math.random()*rows);
+            let c=Math.floor(Math.random()*cols);
+            if(!mineGrid[r][c].mine){
+                mineGrid[r][c].mine=true;
+                placed++;
+            }
+        }
+    }
+
+    function calculateCounts(){
+        for(let r=0;r<rows;r++){
+            for(let c=0;c<cols;c++){
+                if(mineGrid[r][c].mine) continue;
+                let count=0;
+                for(let i=-1;i<=1;i++){
+                    for(let j=-1;j<=1;j++){
+                        let nr=r+i,nc=c+j;
+                        if(nr>=0 && nr<rows && nc>=0 && nc<cols && mineGrid[nr][nc].mine){
+                            count++;
+                        }
+                    }
+                }
+                mineGrid[r][c].count=count;
+            }
+        }
+    }
+
+    function drawGrid(){
+        const container=document.getElementById("minesweeper");
+        container.innerHTML="";
+        container.style.gridTemplateColumns=`repeat(${cols},30px)`;
+
+        for(let r=0;r<rows;r++){
+            for(let c=0;c<cols;c++){
+                const cell=document.createElement("div");
+                cell.className="cell";
+                cell.onclick=()=>reveal(r,c);
+                container.appendChild(cell);
+            }
+        }
+    }
+
+    function reveal(r,c){
+        const index=r*cols+c;
+        const cell=document.getElementsByClassName("cell")[index];
+        if(mineGrid[r][c].revealed) return;
+
+        mineGrid[r][c].revealed=true;
+        cell.classList.add("revealed");
+
+        if(mineGrid[r][c].mine){
+            cell.classList.add("mine");
+            cell.innerText="💣";
+            clearInterval(mineTimer);
+            alert("游戏失败！");
+            return;
+        }
+
+        revealedCount++;
+        if(mineGrid[r][c].count>0){
+            cell.innerText=mineGrid[r][c].count;
+        }else{
+            for(let i=-1;i<=1;i++){
+                for(let j=-1;j<=1;j++){
+                    let nr=r+i,nc=c+j;
+                    if(nr>=0 && nr<rows && nc>=0 && nc<cols){
+                        if(!mineGrid[nr][nc].revealed){
+                            reveal(nr,nc);
+                        }
+                    }
+                }
+            }
+        }
+
+        if(revealedCount === rows*cols - mines){
+            clearInterval(mineTimer);
+            alert("恭喜通关！");
+        }
+    }
+</script>
+
+</body>
+</html>
