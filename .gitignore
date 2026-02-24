@@ -27,4 +27,4 @@ build/
 
 .flattened-pom.xml
 
-/mall-system/
+/node_modules/
