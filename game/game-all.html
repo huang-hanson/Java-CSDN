@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔥 游戏大厅 - 经典小游戏合集</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: white;
+            font-size: 48px;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .game {
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            color: white;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .game.active {
+            display: block;
+        }
+
+        #menu {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 800px;
+        }
+
+        #menu button {
+            padding: 20px 40px;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: linear-gradient(135deg, #00c853 0%, #00e676 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.4);
+        }
+
+        #menu button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 200, 83, 0.6);
+        }
+
+        .game h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .game p, .game span {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+        .controls {
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .difficulty {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .difficulty button {
+            padding: 10px 25px;
+            font-size: 16px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .difficulty button.active {
+            background: linear-gradient(135deg, #00c853 0%, #00e676 100%);
+            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.4);
+        }
+
+        .difficulty button:hover {
+            transform: scale(1.05);
+        }
+
+        .game button {
+            padding: 15px 40px;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            background: linear-gradient(135deg, #00c853 0%, #00e676 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.4);
+            transition: all 0.3s;
+        }
+
+        .game button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 200, 83, 0.6);
+        }
+
+        canvas {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            margin: 20px auto;
+            display: block;
+        }
+
+        .grid {
+            display: grid;
+            gap: 5px;
+            margin: 20px auto;
+            justify-content: center;
+        }
+
+        .grid div {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .grid div:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        /* 扫雷格子样式 */
+        .mine-cell {
+            background: #8B4513;
+        }
+
+        .mine-cell.revealed {
+            background: #d4a574;
+        }
+
+        .mine-cell.flagged::after {
+            content: '🚩';
+        }
+
+        .mine-cell.mine {
+            background: #ff6b6b;
+        }
+
+        .mine-cell.mine::after {
+            content: '💣';
+        }
+
+        /* 打地鼠样式 */
+        .hole {
+            width: 80px;
+            height: 80px;
+            background: #8B4513;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .mole {
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle at 30% 30%, #8B4513, #5D3A1A);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) translateY(100%);
+            transition: transform 0.2s ease-out;
+        }
+
+        .mole::before, .mole::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #333;
+            border-radius: 50%;
+            top: 20px;
+        }
+
+        .mole::before { left: 15px; }
+        .mole::after { right: 15px; }
+
+        .mole.active {
+            transform: translate(-50%, -50%) translateY(0);
+        }
+
+        .mole.hit {
+            background: radial-gradient(circle at 30% 30%, #ff6b6b, #ee5a5a);
+            animation: hit 0.3s ease-out;
+        }
+
+        @keyframes hit {
+            0% { transform: translate(-50%, -50%) translateY(0) scale(1); }
+            50% { transform: translate(-50%, -50%) translateY(0) scale(1.2); }
+            100% { transform: translate(-50%, -50%) translateY(100%) scale(0.8); }
+        }
+
+        .nose {
+            width: 15px;
+            height: 12px;
+            background: #FF69B4;
+            border-radius: 50%;
+            position: absolute;
+            top: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* 2048 样式 */
+        .tile {
+            background: #eee4da;
+            color: #776e65;
+        }
+
+        .tile-2 { background: #eee4da; }
+        .tile-4 { background: #ede0c8; }
+        .tile-8 { background: #f2b179; color: #f9f6f2; }
+        .tile-16 { background: #f59563; color: #f9f6f2; }
+        .tile-32 { background: #f67c5f; color: #f9f6f2; }
+        .tile-64 { background: #f65e3b; color: #f9f6f2; }
+        .tile-128 { background: #edcf72; color: #f9f6f2; }
+        .tile-256 { background: #edcc61; color: #f9f6f2; }
+        .tile-512 { background: #edc850; color: #f9f6f2; }
+        .tile-1024 { background: #edc53f; color: #f9f6f2; }
+        .tile-2048 { background: #edc22e; color: #f9f6f2; }
+
+        #backBtn {
+            margin-top: 20px;
+        }
+
+        #backBtn button {
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(238, 90, 90, 0.4);
+            transition: all 0.3s;
+        }
+
+        #backBtn button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(238, 90, 90, 0.6);
+        }
+
+        .info {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+
+        .instructions {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+<h1>🎮 经典小游戏大厅</h1>
+
+<div id="menu">
+    <button onclick="openGame('snake')">🐍 贪吃蛇</button>
+    <button onclick="openGame('mine')">💣 扫雷</button>
+    <button onclick="openGame('whack')">🔨 打地鼠</button>
+    <button onclick="openGame('tetris')">🧱 俄罗斯方块</button>
+    <button onclick="openGame('g2048')">🧠 2048</button>
+</div>
+
+<!-- 公共返回按钮 -->
+<div id="backBtn" style="display:none;">
+    <button onclick="goHome()">🏠 返回大厅</button>
+</div>
+
+<!-- ================= 贪吃蛇 ================= -->
+<div id="snake" class="game">
+    <h2>🐍 贪吃蛇</h2>
+    <div class="controls">
+        <div class="difficulty">
+            <button onclick="setSnakeDifficulty('easy')" id="snakeEasy" class="active">简单</button>
+            <button onclick="setSnakeDifficulty('medium')" id="snakeMedium">中等</button>
+            <button onclick="setSnakeDifficulty('hard')" id="snakeHard">困难</button>
+        </div>
+        <div class="info">得分: <span id="snakeScore">0</span></div>
+        <button onclick="startSnake()">开始游戏</button>
+    </div>
+    <p class="instructions">使用方向键或 WASD 控制蛇的移动</p>
+    <canvas id="snakeCanvas" width="400" height="400"></canvas>
+</div>
+
+<!-- ================= 扫雷 ================= -->
+<div id="mine" class="game">
+    <h2>💣 扫雷</h2>
+    <div class="controls">
+        <div class="difficulty">
+            <button onclick="setMineDifficulty('easy')" id="mineEasy" class="active">简单</button>
+            <button onclick="setMineDifficulty('medium')" id="mineMedium">中等</button>
+            <button onclick="setMineDifficulty('hard')" id="mineHard">困难</button>
+        </div>
+        <div class="info">雷数: <span id="mineCount">10</span></div>
+        <button onclick="startMine()">开始游戏</button>
+    </div>
+    <p class="instructions">左键点击揭开，右键插旗标记地雷</p>
+    <div id="mineGrid" class="grid"></div>
+</div>
+
+<!-- ================= 打地鼠 ================= -->
+<div id="whack" class="game">
+    <h2>🔨 打地鼠</h2>
+    <div class="controls">
+        <div class="difficulty">
+            <button onclick="setWhackDifficulty('easy')" id="whackEasy" class="active">简单</button>
+            <button onclick="setWhackDifficulty('medium')" id="whackMedium">中等</button>
+            <button onclick="setWhackDifficulty('hard')" id="whackHard">困难</button>
+        </div>
+        <div class="info">时间: <span id="whackTime">30</span>秒 | 得分: <span id="whackScore">0</span></div>
+        <button onclick="startWhack()">开始游戏</button>
+    </div>
+    <p class="instructions">点击地鼠得分</p>
+    <div id="whackGrid" class="grid"></div>
+</div>
+
+<!-- ================= 俄罗斯方块 ================= -->
+<div id="tetris" class="game">
+    <h2>🧱 俄罗斯方块</h2>
+    <div class="controls">
+        <div class="difficulty">
+            <button onclick="setTetrisDifficulty('easy')" id="tetrisEasy" class="active">简单</button>
+            <button onclick="setTetrisDifficulty('medium')" id="tetrisMedium">中等</button>
+            <button onclick="setTetrisDifficulty('hard')" id="tetrisHard">困难</button>
+        </div>
+        <div class="info">得分: <span id="tetrisScore">0</span></div>
+        <button onclick="startTetris()">开始游戏</button>
+    </div>
+    <p class="instructions">方向键移动和旋转，上键旋转</p>
+    <canvas id="tetrisCanvas" width="300" height="400"></canvas>
+</div>
+
+<!-- ================= 2048 ================= -->
+<div id="g2048" class="game">
+    <h2>🧠 2048</h2>
+    <div class="controls">
+        <div class="difficulty">
+            <button onclick="set2048Difficulty('easy')" id="g2048Easy" class="active">简单</button>
+            <button onclick="set2048Difficulty('medium')" id="g2048Medium">中等</button>
+            <button onclick="set2048Difficulty('hard')" id="g2048Hard">困难</button>
+        </div>
+        <div class="info">得分: <span id="score2048">0</span> | 最高分: <span id="best2048">0</span></div>
+        <button onclick="start2048()">开始游戏</button>
+    </div>
+    <p class="instructions">使用方向键合并相同数字的方块</p>
+    <div id="grid2048" class="grid"></div>
+</div>
+
+<script>
+    // ========== 游戏大厅控制 ==========
+    function openGame(gameId) {
+        document.getElementById('menu').style.display = 'none';
+        document.querySelectorAll('.game').forEach(g => g.classList.remove('active'));
+        document.getElementById(gameId).classList.add('active');
+        document.getElementById('backBtn').style.display = 'block';
+
+        // 初始化对应游戏
+        switch(gameId) {
+            case 'snake': initSnake(); break;
+            case 'mine': initMine(); break;
+            case 'whack': initWhack(); break;
+            case 'tetris': initTetris(); break;
+            case 'g2048': init2048(); break;
+        }
+    }
+
+    function goHome() {
+        document.getElementById('menu').style.display = 'flex';
+        document.querySelectorAll('.game').forEach(g => g.classList.remove('active'));
+        document.getElementById('backBtn').style.display = 'none';
+
+        // 停止所有游戏
+        stopAllGames();
+    }
+
+    function stopAllGames() {
+        stopSnake();
+        stopMine();
+        stopWhack();
+        stopTetris();
+        stop2048();
+    }
+
+    // ========== 贪吃蛇 ==========
+    let snakeCanvas, snakeCtx;
+    let snake = [];
+    let snakeDirection = {x: 1, y: 0};
+    let nextDirection = {x: 1, y: 0};
+    let snakeFood = {};
+    let snakeInterval;
+    let snakeScore = 0;
+    let snakeDifficulty = 'easy';
+    let snakeRunning = false;
+
+    const snakeSettings = {
+        easy: { speed: 200, size: 20 },
+        medium: { speed: 150, size: 20 },
+        hard: { speed: 100, size: 15 }
+    };
+
+    function setSnakeDifficulty(diff) {
+        snakeDifficulty = diff;
+        document.querySelectorAll('[id^="snake"][id$="Easy"], [id^="snake"][id$="Medium"], [id^="snake"][id$="Hard"]').forEach(b => b.classList.remove('active'));
+        document.getElementById('snake' + diff.charAt(0).toUpperCase() + diff.slice(1)).classList.add('active');
+        if (snakeRunning) startSnake();
+    }
+
+    function initSnake() {
+        snakeCanvas = document.getElementById('snakeCanvas');
+        snakeCtx = snakeCanvas.getContext('2d');
+    }
+
+    function startSnake() {
+        stopSnake();
+        const setting = snakeSettings[snakeDifficulty];
+        const gridSize = setting.size;
+        const gridCount = snakeCanvas.width / gridSize;
+
+        snake = [{x: 5, y: 5}, {x: 4, y: 5}, {x: 3, y: 5}];
+        snakeDirection = {x: 1, y: 0};
+        nextDirection = {x: 1, y: 0};
+        snakeScore = 0;
+        document.getElementById('snakeScore').textContent = snakeScore;
+        placeSnakeFood(gridCount);
+
+        snakeRunning = true;
+        snakeInterval = setInterval(() => updateSnake(gridCount, gridSize), setting.speed);
+    }
+
+    function stopSnake() {
+        clearInterval(snakeInterval);
+        snakeRunning = false;
+    }
+
+    function placeSnakeFood(gridCount) {
+        do {
+            snakeFood = {
+                x: Math.floor(Math.random() * gridCount),
+                y: Math.floor(Math.random() * gridCount)
+            };
+        } while (snake.some(s => s.x === snakeFood.x && s.y === snakeFood.y));
+    }
+
+    function updateSnake(gridCount, gridSize) {
+        snakeDirection = {...nextDirection};
+        const head = {x: snake[0].x + snakeDirection.x, y: snake[0].y + snakeDirection.y};
+
+        // 检测碰撞
+        if (head.x < 0 || head.x >= gridCount || head.y < 0 || head.y >= gridCount ||
+            snake.some(s => s.x === head.x && s.y === head.y)) {
+            stopSnake();
+            alert('游戏结束！得分: ' + snakeScore);
+            return;
+        }
+
+        snake.unshift(head);
+
+        // 检测食物
+        if (head.x === snakeFood.x && head.y === snakeFood.y) {
+            snakeScore += 10;
+            document.getElementById('snakeScore').textContent = snakeScore;
+            placeSnakeFood(gridCount);
+        } else {
+            snake.pop();
+        }
+
+        drawSnake(gridSize);
+    }
+
+    function drawSnake(gridSize) {
+        snakeCtx.fillStyle = '#1a1a2e';
+        snakeCtx.fillRect(0, 0, snakeCanvas.width, snakeCanvas.height);
+
+        // 绘制食物
+        snakeCtx.fillStyle = '#e74c3c';
+        snakeCtx.fillRect(snakeFood.x * gridSize, snakeFood.y * gridSize, gridSize - 2, gridSize - 2);
+
+        // 绘制蛇
+        snake.forEach((s, i) => {
+            snakeCtx.fillStyle = i === 0 ? '#2ecc71' : '#27ae60';
+            snakeCtx.fillRect(s.x * gridSize, s.y * gridSize, gridSize - 2, gridSize - 2);
+        });
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (!snakeRunning) return;
+        switch(e.key) {
+            case 'ArrowUp': case 'w': case 'W':
+                if (snakeDirection.y !== 1) nextDirection = {x: 0, y: -1}; break;
+            case 'ArrowDown': case 's': case 'S':
+                if (snakeDirection.y !== -1) nextDirection = {x: 0, y: 1}; break;
+            case 'ArrowLeft': case 'a': case 'A':
+                if (snakeDirection.x !== 1) nextDirection = {x: -1, y: 0}; break;
+            case 'ArrowRight': case 'd': case 'D':
+                if (snakeDirection.x !== -1) nextDirection = {x: 1, y: 0}; break;
+        }
+    });
+
+    // ========== 扫雷 ==========
+    let mineGrid = [];
+    let mineRevealed = [];
+    let mineFlagged = [];
+    let mineCount = 0;
+    let mineDifficulty = 'easy';
+    let mineGameOver = false;
+
+    const mineSettings = {
+        easy: { rows: 8, cols: 8, mines: 10 },
+        medium: { rows: 12, cols: 12, mines: 30 },
+        hard: { rows: 16, cols: 16, mines: 50 }
+    };
+
+    function setMineDifficulty(diff) {
+        mineDifficulty = diff;
+        document.querySelectorAll('[id^="mine"][id$="Easy"], [id^="mine"][id$="Medium"], [id^="mine"][id$="Hard"]').forEach(b => b.classList.remove('active'));
+        document.getElementById('mine' + diff.charAt(0).toUpperCase() + diff.slice(1)).classList.add('active');
+    }
+
+    function initMine() {
+        // 初始化逻辑
+    }
+
+    function startMine() {
+        const setting = mineSettings[mineDifficulty];
+        mineGrid = [];
+        mineRevealed = [];
+        mineFlagged = [];
+        mineGameOver = false;
+
+        for (let i = 0; i < setting.rows; i++) {
+            mineGrid[i] = [];
+            mineRevealed[i] = [];
+            mineFlagged[i] = [];
+            for (let j = 0; j < setting.cols; j++) {
+                mineGrid[i][j] = 0;
+                mineRevealed[i][j] = false;
+                mineFlagged[i][j] = false;
+            }
+        }
+
+        // 布雷
+        let placed = 0;
+        while (placed < setting.mines) {
+            const row = Math.floor(Math.random() * setting.rows);
+            const col = Math.floor(Math.random() * setting.cols);
+            if (mineGrid[row][col] !== -1) {
+                mineGrid[row][col] = -1;
+                placed++;
+            }
+        }
+
+        // 计算数字
+        for (let i = 0; i < setting.rows; i++) {
+            for (let j = 0; j < setting.cols; j++) {
+                if (mineGrid[i][j] !== -1) {
+                    let count = 0;
+                    for (let di = -1; di <= 1; di++) {
+                        for (let dj = -1; dj <= 1; dj++) {
+                            const ni = i + di, nj = j + dj;
+                            if (ni >= 0 && ni < setting.rows && nj >= 0 && nj < setting.cols && mineGrid[ni][nj] === -1) {
+                                count++;
+                            }
+                        }
+                    }
+                    mineGrid[i][j] = count;
+                }
+            }
+        }
+
+        renderMineGrid(setting);
+    }
+
+    function renderMineGrid(setting) {
+        const grid = document.getElementById('mineGrid');
+        grid.innerHTML = '';
+        grid.style.gridTemplateColumns = `repeat(${setting.cols}, 40px)`;
+        grid.style.gridTemplateRows = `repeat(${setting.rows}, 40px)`;
+
+        let remainingMines = setting.mines;
+        for (let i = 0; i < setting.rows; i++) {
+            for (let j = 0; j < setting.cols; j++) {
+                const cell = document.createElement('div');
+                cell.className = 'mine-cell';
+                cell.style.width = '40px';
+                cell.style.height = '40px';
+                cell.dataset.row = i;
+                cell.dataset.col = j;
+
+                cell.addEventListener('click', () => revealMineCell(i, j, setting));
+                cell.addEventListener('contextmenu', (e) => {
+                    e.preventDefault();
+                    flagMineCell(i, j, setting);
+                });
+
+                grid.appendChild(cell);
+            }
+        }
+        document.getElementById('mineCount').textContent = remainingMines;
+    }
+
+    function revealMineCell(row, col, setting) {
+        if (mineGameOver || mineRevealed[row][col] || mineFlagged[row][col]) return;
+
+        mineRevealed[row][col] = true;
+        const cells = document.querySelectorAll('.mine-cell');
+        const index = row * setting.cols + col;
+        const cell = cells[index];
+
+        if (mineGrid[row][col] === -1) {
+            mineGameOver = true;
+            cell.classList.add('mine');
+            revealAllMines(setting);
+            setTimeout(() => alert('游戏结束！你踩到地雷了！'), 100);
+        } else if (mineGrid[row][col] === 0) {
+            cell.classList.add('revealed');
+            cell.style.background = '#d4a574';
+            // 递归揭开
+            for (let di = -1; di <= 1; di++) {
+                for (let dj = -1; dj <= 1; dj++) {
+                    const ni = row + di, nj = col + dj;
+                    if (ni >= 0 && ni < setting.rows && nj >= 0 && nj < setting.cols) {
+                        revealMineCell(ni, nj, setting);
+                    }
+                }
+            }
+        } else {
+            cell.classList.add('revealed');
+            cell.style.background = '#d4a574';
+            cell.textContent = mineGrid[row][col];
+            cell.style.color = getMineNumberColor(mineGrid[row][col]);
+        }
+
+        checkMineWin(setting);
+    }
+
+    function flagMineCell(row, col, setting) {
+        if (mineGameOver || mineRevealed[row][col]) return;
+
+        mineFlagged[row][col] = !mineFlagged[row][col];
+        const cells = document.querySelectorAll('.mine-cell');
+        const index = row * setting.cols + col;
+        const cell = cells[index];
+
+        if (mineFlagged[row][col]) {
+            cell.classList.add('flagged');
+        } else {
+            cell.classList.remove('flagged');
+        }
+
+        updateMineCount(setting);
+    }
+
+    function updateMineCount(setting) {
+        let flagCount = 0;
+        for (let i = 0; i < setting.rows; i++) {
+            for (let j = 0; j < setting.cols; j++) {
+                if (mineFlagged[i][j]) flagCount++;
+            }
+        }
+        document.getElementById('mineCount').textContent = setting.mines - flagCount;
+    }
+
+    function revealAllMines(setting) {
+        const cells = document.querySelectorAll('.mine-cell');
+        for (let i = 0; i < setting.rows; i++) {
+            for (let j = 0; j < setting.cols; j++) {
+                if (mineGrid[i][j] === -1) {
+                    const index = i * setting.cols + j;
+                    cells[index].classList.add('mine');
+                }
+            }
+        }
+    }
+
+    function checkMineWin(setting) {
+        let revealedCount = 0;
+        for (let i = 0; i < setting.rows; i++) {
+            for (let j = 0; j < setting.cols; j++) {
+                if (mineRevealed[i][j]) revealedCount++;
+            }
+        }
+        if (revealedCount === setting.rows * setting.cols - setting.mines) {
+            mineGameOver = true;
+            setTimeout(() => alert('恭喜你赢了！'), 100);
+        }
+    }
+
+    function getMineNumberColor(num) {
+        const colors = ['', '#1976d2', '#388e3c', '#d32f2f', '#7b1fa2', '#ff8f00', '#0097a7', '#424242', '#757575'];
+        return colors[num] || '#000';
+    }
+
+    function stopMine() {
+        mineGameOver = false;
+    }
+
+    // ========== 打地鼠 ==========
+    let whackInterval;
+    let whackMoleInterval;
+    let whackScore = 0;
+    let whackTime = 30;
+    let whackRunning = false;
+    let whackDifficulty = 'easy';
+
+    const whackSettings = {
+        easy: { time: 30, moleTime: 2000, interval: 1500 },
+        medium: { time: 30, moleTime: 1500, interval: 1200 },
+        hard: { time: 30, moleTime: 1000, interval: 800 }
+    };
+
+    function setWhackDifficulty(diff) {
+        whackDifficulty = diff;
+        document.querySelectorAll('[id^="whack"][id$="Easy"], [id^="whack"][id$="Medium"], [id^="whack"][id$="Hard"]').forEach(b => b.classList.remove('active'));
+        document.getElementById('whack' + diff.charAt(0).toUpperCase() + diff.slice(1)).classList.add('active');
+    }
+
+    function initWhack() {
+        createWhackGrid();
+    }
+
+    function createWhackGrid() {
+        const grid = document.getElementById('whackGrid');
+        grid.innerHTML = '';
+        grid.style.gridTemplateColumns = 'repeat(4, 80px)';
+        grid.style.gridTemplateRows = 'repeat(4, 80px)';
+
+        for (let i = 0; i < 16; i++) {
+            const hole = document.createElement('div');
+            hole.className = 'hole';
+            hole.dataset.index = i;
+
+            const mole = document.createElement('div');
+            mole.className = 'mole';
+
+            const nose = document.createElement('div');
+            nose.className = 'nose';
+
+            mole.appendChild(nose);
+            hole.appendChild(mole);
+            grid.appendChild(hole);
+
+            hole.addEventListener('click', () => hitMole(hole));
+        }
+    }
+
+    function startWhack() {
+        stopWhack();
+        const setting = whackSettings[whackDifficulty];
+        whackScore = 0;
+        whackTime = setting.time;
+        whackRunning = true;
+
+        document.getElementById('whackScore').textContent = whackScore;
+        document.getElementById('whackTime').textContent = whackTime;
+
+        // 隐藏所有地鼠
+        document.querySelectorAll('.mole').forEach(mole => {
+            mole.classList.remove('active', 'hit');
+        });
+
+        // 开始计时
+        whackInterval = setInterval(() => {
+            whackTime--;
+            document.getElementById('whackTime').textContent = whackTime;
+            if (whackTime <= 0) {
+                endWhack();
+            }
+        }, 1000);
+
+        // 显示地鼠
+        showMole(setting);
+        scheduleMole(setting);
+    }
+
+    function stopWhack() {
+        clearInterval(whackInterval);
+        clearTimeout(whackMoleInterval);
+        whackRunning = false;
+    }
+
+    function showMole(setting) {
+        if (!whackRunning) return;
+
+        const moles = document.querySelectorAll('.mole');
+        const activeMoles = document.querySelectorAll('.mole.active');
+
+        // 隐藏之前的地鼠
+        activeMoles.forEach(mole => mole.classList.remove('active', 'hit'));
+
+        // 随机选择
+        const randomIndex = Math.floor(Math.random() * moles.length);
+        const randomMole = moles[randomIndex];
+        randomMole.classList.add('active');
+
+        // 自动消失
+        setTimeout(() => {
+            if (randomMole.classList.contains('active') && !randomMole.classList.contains('hit')) {
+                randomMole.classList.remove('active');
+            }
+        }, setting.moleTime);
+    }
+
+    function scheduleMole(setting) {
+        if (!whackRunning) return;
+
+        whackMoleInterval = setTimeout(() => {
+            showMole(setting);
+            scheduleMole(setting);
+        }, setting.interval);
+    }
+
+    function hitMole(hole) {
+        if (!whackRunning) return;
+
+        const mole = hole.querySelector('.mole');
+        if (mole.classList.contains('active') && !mole.classList.contains('hit')) {
+            whackScore += 10;
+            document.getElementById('whackScore').textContent = whackScore;
+            mole.classList.add('hit');
+            mole.classList.remove('active');
+            playWhackSound();
+
+            setTimeout(() => mole.classList.remove('hit'), 300);
+        }
+    }
+
+    function playWhackSound() {
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+
+        oscillator.frequency.value = 800;
+        oscillator.type = 'sine';
+
+        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.1);
+    }
+
+    function endWhack() {
+        stopWhack();
+        alert('游戏结束！得分: ' + whackScore);
+    }
+
+    // ========== 俄罗斯方块 ==========
+    let tetrisCanvas, tetrisCtx;
+    let tetrisBoard = [];
+    let tetrisCurrentPiece = null;
+    let tetrisInterval;
+    let tetrisScore = 0;
+    let tetrisRunning = false;
+    let tetrisDifficulty = 'easy';
+
+    const COLS = 10, ROWS = 20, BLOCK_SIZE = 30;
+
+    const tetrisSettings = {
+        easy: { speed: 1000 },
+        medium: { speed: 600 },
+        hard: { speed: 300 }
+    };
+
+    const PIECES = [
+        [[1, 1, 1, 1]], // I
+        [[1, 1], [1, 1]], // O
+        [[0, 1, 0], [1, 1, 1]], // T
+        [[1, 0, 0], [1, 1, 1]], // L
+        [[0, 0, 1], [1, 1, 1]], // J
+        [[0, 1, 1], [1, 1, 0]], // S
+        [[1, 1, 0], [0, 1, 1]]  // Z
+    ];
+
+    const PIECE_COLORS = ['#00f0f0', '#f0f000', '#a000f0', '#f0a000', '#0000f0', '#00f000', '#f00000'];
+
+    function setTetrisDifficulty(diff) {
+        tetrisDifficulty = diff;
+        document.querySelectorAll('[id^="tetris"][id$="Easy"], [id^="tetris"][id$="Medium"], [id^="tetris"][id$="Hard"]').forEach(b => b.classList.remove('active'));
+        document.getElementById('tetris' + diff.charAt(0).toUpperCase() + diff.slice(1)).classList.add('active');
+        if (tetrisRunning) startTetris();
+    }
+
+    function initTetris() {
+        tetrisCanvas = document.getElementById('tetrisCanvas');
+        tetrisCtx = tetrisCanvas.getContext('2d');
+    }
+
+    function startTetris() {
+        stopTetris();
+        const setting = tetrisSettings[tetrisDifficulty];
+
+        // 初始化棋盘
+        tetrisBoard = [];
+        for (let i = 0; i < ROWS; i++) {
+            tetrisBoard[i] = new Array(COLS).fill(0);
+        }
+
+        tetrisScore = 0;
+        document.getElementById('tetrisScore').textContent = tetrisScore;
+
+        tetrisCurrentPiece = createPiece();
+        tetrisRunning = true;
+
+        tetrisInterval = setInterval(() => updateTetris(), setting.speed);
+        drawTetris();
+    }
+
+    function stopTetris() {
+        clearInterval(tetrisInterval);
+        tetrisRunning = false;
+    }
+
+    function createPiece() {
+        const pieceIndex = Math.floor(Math.random() * PIECES.length);
+        return {
+            shape: PIECES[pieceIndex],
+            color: PIECE_COLORS[pieceIndex],
+            x: Math.floor(COLS / 2) - Math.floor(PIECES[pieceIndex][0].length / 2),
+            y: 0
+        };
+    }
+
+    function updateTetris() {
+        if (!tetrisCurrentPiece) return;
+
+        tetrisCurrentPiece.y++;
+
+        if (collisionTetris()) {
+            tetrisCurrentPiece.y--;
+            placePieceTetris();
+            clearLinesTetris();
+            tetrisCurrentPiece = createPiece();
+
+            if (collisionTetris()) {
+                stopTetris();
+                alert('游戏结束！得分: ' + tetrisScore);
+                return;
+            }
+        }
+
+        drawTetris();
+    }
+
+    function collisionTetris() {
+        if (!tetrisCurrentPiece) return false;
+        for (let y = 0; y < tetrisCurrentPiece.shape.length; y++) {
+            for (let x = 0; x < tetrisCurrentPiece.shape[y].length; x++) {
+                if (tetrisCurrentPiece.shape[y][x]) {
+                    const newX = tetrisCurrentPiece.x + x;
+                    const newY = tetrisCurrentPiece.y + y;
+
+                    if (newX < 0 || newX >= COLS || newY >= ROWS || (newY >= 0 && tetrisBoard[newY][newX])) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    function placePieceTetris() {
+        for (let y = 0; y < tetrisCurrentPiece.shape.length; y++) {
+            for (let x = 0; x < tetrisCurrentPiece.shape[y].length; x++) {
+                if (tetrisCurrentPiece.shape[y][x]) {
+                    const boardY = tetrisCurrentPiece.y + y;
+                    const boardX = tetrisCurrentPiece.x + x;
+                    if (boardY >= 0) {
+                        tetrisBoard[boardY][boardX] = tetrisCurrentPiece.color;
+                    }
+                }
+            }
+        }
+    }
+
+    function clearLinesTetris() {
+        for (let y = ROWS - 1; y >= 0; y--) {
+            if (tetrisBoard[y].every(cell => cell !== 0)) {
+                tetrisBoard.splice(y, 1);
+                tetrisBoard.unshift(new Array(COLS).fill(0));
+                tetrisScore += 100;
+                document.getElementById('tetrisScore').textContent = tetrisScore;
+                y++;
+            }
+        }
+    }
+
+    function drawTetris() {
+        // 清空画布
+        tetrisCtx.fillStyle = '#1a1a2e';
+        tetrisCtx.fillRect(0, 0, tetrisCanvas.width, tetrisCanvas.height);
+
+        // 绘制棋盘
+        for (let y = 0; y < ROWS; y++) {
+            for (let x = 0; x < COLS; x++) {
+                if (tetrisBoard[y][x]) {
+                    drawBlockTetris(x, y, tetrisBoard[y][x]);
+                }
+            }
+        }
+
+        // 绘制当前方块
+        if (tetrisCurrentPiece) {
+            for (let y = 0; y < tetrisCurrentPiece.shape.length; y++) {
+                for (let x = 0; x < tetrisCurrentPiece.shape[y].length; x++) {
+                    if (tetrisCurrentPiece.shape[y][x]) {
+                        drawBlockTetris(tetrisCurrentPiece.x + x, tetrisCurrentPiece.y + y, tetrisCurrentPiece.color);
+                    }
+                }
+            }
+        }
+    }
+
+    function drawBlockTetris(x, y, color) {
+        tetrisCtx.fillStyle = color;
+        tetrisCtx.fillRect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
+        tetrisCtx.strokeStyle = '#000';
+        tetrisCtx.strokeRect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (!tetrisRunning || !tetrisCurrentPiece) return;
+
+        switch(e.key) {
+            case 'ArrowLeft':
+                tetrisCurrentPiece.x--;
+                if (collisionTetris()) tetrisCurrentPiece.x++;
+                break;
+            case 'ArrowRight':
+                tetrisCurrentPiece.x++;
+                if (collisionTetris()) tetrisCurrentPiece.x--;
+                break;
+            case 'ArrowDown':
+                tetrisCurrentPiece.y++;
+                if (collisionTetris()) {
+                    tetrisCurrentPiece.y--;
+                    placePieceTetris();
+                    clearLinesTetris();
+                    tetrisCurrentPiece = createPiece();
+                    if (collisionTetris()) {
+                        stopTetris();
+                        alert('游戏结束！得分: ' + tetrisScore);
+                        return;
+                    }
+                }
+                break;
+            case 'ArrowUp':
+                rotateTetrisPiece();
+                break;
+        }
+        drawTetris();
+    });
+
+    function rotateTetrisPiece() {
+        const rotated = tetrisCurrentPiece.shape[0].map((_, i) =>
+            tetrisCurrentPiece.shape.map(row => row[i]).reverse()
+        );
+        const oldShape = tetrisCurrentPiece.shape;
+        tetrisCurrentPiece.shape = rotated;
+        if (collisionTetris()) {
+            tetrisCurrentPiece.shape = oldShape;
+        }
+    }
+
+    // ========== 2048 ==========
+    let grid2048 = [];
+    let score2048 = 0;
+    let best2048 = 0;
+    let g2048Difficulty = 'easy';
+    let game2048Over = false;
+
+    const g2048Settings = {
+        easy: { size: 3, target: 512 },
+        medium: { size: 4, target: 2048 },
+        hard: { size: 5, target: 4096 }
+    };
+
+    function set2048Difficulty(diff) {
+        g2048Difficulty = diff;
+        document.querySelectorAll('[id^="g2048"][id$="Easy"], [id^="g2048"][id$="Medium"], [id^="g2048"][id$="Hard"]').forEach(b => b.classList.remove('active'));
+        document.getElementById('g2048' + diff.charAt(0).toUpperCase() + diff.slice(1)).classList.add('active');
+    }
+
+    function init2048() {
+        if (grid2048.length === 0) start2048();
+    }
+
+    function start2048() {
+        const setting = g2048Settings[g2048Difficulty];
+        grid2048 = [];
+        for (let i = 0; i < setting.size; i++) {
+            grid2048[i] = new Array(setting.size).fill(0);
+        }
+        score2048 = 0;
+        game2048Over = false;
+
+        addNewTile2048(setting.size);
+        addNewTile2048(setting.size);
+        updateScore2048();
+        renderGrid2048(setting);
+    }
+
+    function addNewTile2048(size) {
+        let empty = [];
+        for (let i = 0; i < size; i++) {
+            for (let j = 0; j < size; j++) {
+                if (grid2048[i][j] === 0) empty.push({x: i, y: j});
+            }
+        }
+        if (empty.length > 0) {
+            const pos = empty[Math.floor(Math.random() * empty.length)];
+            grid2048[pos.x][pos.y] = Math.random() < 0.9 ? 2 : 4;
+        }
+    }
+
+    function updateScore2048() {
+        document.getElementById('score2048').textContent = score2048;
+        if (score2048 > best2048) {
+            best2048 = score2048;
+            document.getElementById('best2048').textContent = best2048;
+        }
+    }
+
+    function renderGrid2048(setting) {
+        const grid = document.getElementById('grid2048');
+        grid.innerHTML = '';
+        const cellSize = setting.size === 3 ? 100 : 80;
+
+        grid.style.gridTemplateColumns = `repeat(${setting.size}, ${cellSize}px)`;
+        grid.style.gridTemplateRows = `repeat(${setting.size}, ${cellSize}px)`;
+
+        for (let i = 0; i < setting.size; i++) {
+            for (let j = 0; j < setting.size; j++) {
+                const cell = document.createElement('div');
+                const value = grid2048[i][j];
+
+                cell.className = 'tile';
+                cell.style.width = cellSize + 'px';
+                cell.style.height = cellSize + 'px';
+                cell.style.fontSize = value >= 1000 ? '20px' : '30px';
+
+                if (value > 0) {
+                    cell.classList.add('tile-' + (value <= 2048 ? value : '2048'));
+                    cell.textContent = value;
+                }
+
+                grid.appendChild(cell);
+            }
+        }
+    }
+
+    function move2048(direction) {
+        if (game2048Over) return;
+
+        const setting = g2048Settings[g2048Difficulty];
+        let moved = false;
+        const size = setting.size;
+
+        const rotateGrid = (grid) => {
+            const newGrid = [];
+            for (let i = 0; i < size; i++) {
+                newGrid[i] = [];
+                for (let j = 0; j < size; j++) {
+                    newGrid[i][j] = grid[size - 1 - j][i];
+                }
+            }
+            return newGrid;
+        };
+
+        // 旋转网格使所有操作都变为向左
+        for (let i = 0; i < direction; i++) {
+            grid2048 = rotateGrid(grid2048);
+        }
+
+        // 向左移动和合并
+        for (let i = 0; i < size; i++) {
+            let row = grid2048[i].filter(v => v !== 0);
+            for (let j = 0; j < row.length - 1; j++) {
+                if (row[j] === row[j + 1]) {
+                    row[j] *= 2;
+                    score2048 += row[j];
+                    row.splice(j + 1, 1);
+                }
+            }
+            while (row.length < size) row.push(0);
+            if (grid2048[i].join(',') !== row.join(',')) moved = true;
+            grid2048[i] = row;
+        }
+
+        // 旋转回原位置
+        for (let i = 0; i < (4 - direction) % 4; i++) {
+            grid2048 = rotateGrid(grid2048);
+        }
+
+        if (moved) {
+            addNewTile2048(size);
+            updateScore2048();
+            renderGrid2048(setting);
+            checkGameOver2048(setting);
+        }
+    }
+
+    function checkGameOver2048(setting) {
+        const size = setting.size;
+
+        // 检查是否有空位
+        for (let i = 0; i < size; i++) {
+            for (let j = 0; j < size; j++) {
+                if (grid2048[i][j] === 0) return;
+            }
+        }
+
+        // 检查是否可以合并
+        for (let i = 0; i < size; i++) {
+            for (let j = 0; j < size; j++) {
+                if (j < size - 1 && grid2048[i][j] === grid2048[i][j + 1]) return;
+                if (i < size - 1 && grid2048[i][j] === grid2048[i + 1][j]) return;
+            }
+        }
+
+        game2048Over = true;
+        setTimeout(() => alert('游戏结束！得分: ' + score2048), 100);
+    }
+
+    function stop2048() {
+        game2048Over = true;
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (!document.getElementById('g2048').classList.contains('active')) return;
+
+        switch(e.key) {
+            case 'ArrowLeft': move2048(0); break;
+            case 'ArrowUp': move2048(1); break;
+            case 'ArrowRight': move2048(2); break;
+            case 'ArrowDown': move2048(3); break;
+        }
+    });
+</script>
+
+</body>
+</html>
