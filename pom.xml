@@ -34,6 +34,7 @@
         <module>rabbitmq-demo</module>
         <module>excel-export</module>
         <module>java-pdf</module>
+        <module>seckill-system</module>
     </modules>
 
     <groupId>com.csdn.dev</groupId>

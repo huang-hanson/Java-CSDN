@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seckill.mapper.SeckillProductMapper">
+
+    <!-- 扣减库存 -->
+    <update id="decreaseStock">
+        UPDATE seckill_product
+        SET stock_count = stock_count - 1,
+            sold_count = sold_count + 1,
+            update_time = NOW()
+        WHERE product_id = #{productId}
+          AND stock_count > 0
+    </update>
+
+    <!-- 增加已售数量 -->
+    <update id="increaseSoldCount">
+        UPDATE seckill_product
+        SET sold_count = sold_count + 1,
+            update_time = NOW()
+        WHERE product_id = #{productId}
+    </update>
+
+</mapper>
